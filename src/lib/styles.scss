@@ -1,0 +1,125 @@
+:root {
+	--foreground: #{$black};
+	--background: #{$white};
+	--foreground-inverse: #{$white};
+	--background-inverse: #{$black};
+
+	font-family: $text;
+	color: var(--foreground);
+	background-color: var(--background);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+	&:has(.directors) {
+		--background: #{$grey-light};
+		--foreground-inverse: #{$grey-light};
+	}
+
+	&:has(.films) {
+		--foreground: #{$white};
+		--background: #{$black};
+		--foreground-inverse: #{$black};
+		--background-inverse: #{$white};
+	}
+}
+
+body {
+	font-size: $base;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: $mobile) {
+    font-size: $mobile_base;
+    line-height: $mobile_scale;
+  }
+}
+
+h1, h2, h3,
+.h1, .h2, .h3 {
+	font-family: $display;
+	font-weight: 350;
+}
+
+h1,
+.h1 {
+	font-size: $base * $scale * 3;
+}
+
+h2,
+.h2 {
+	font-size: $base * $scale * 2;
+}
+
+h3,
+.h3 {
+	font-size: $base * $scale * 1;
+}
+
+p {
+	line-height: $scale;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+input,
+button {
+	font-size: inherit;
+	font-family: inherit;
+}
+
+button:focus:not(:focus-visible) {
+	outline: none;
+}
+
+button,
+.button {
+	cursor: pointer;
+	display: inline-block;
+	padding: ($base * $scale * 0.125) ($base * $scale * 0.333);
+	border-radius: $base;
+	// background: transparent;
+	// border: 1px solid;
+	line-height: 1;
+	border: 1px solid transparent;
+	background-color: $grey-light;
+}
+
+svg {
+	path {
+		fill: currentColor;
+	}
+
+	line {
+		stroke: currentColor;
+	} 
+}
+
+.ta-center {
+	text-align: center;
+}
+
+.visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: auto;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	white-space: nowrap;
+}
