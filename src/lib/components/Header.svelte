@@ -103,6 +103,11 @@
 
       &:not(:has(a.active)) a {
         opacity: 1 !important;
+
+        &:hover,
+        &:focus {
+          opacity: 0.4 !important;
+        }
       }
 
       a, button {
@@ -115,9 +120,19 @@
         &.active {
           opacity: 1 !important;
 
+          &:hover,
+          &:focus {
+            opacity: 0.4 !important;
+          }
+
           + ol {
             a {
               opacity: 1 !important;
+
+              &:hover,
+              &:focus {
+                opacity: 0.4 !important;
+              }
             }
           }
         }

@@ -26,7 +26,7 @@
 </a>
 
 <aside>
-  <h1 class="h2">{data.director.fields.name} information sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed doquis eiusmod tempor eti incididunt. Ut labore et dolore magna aliquaut enim ad minim veniam,  nostrud exercitation ullamcoas  laboris nisi ut aliquip commodo.</h1>
+  <h1 class="h2">{data.director.fields.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; information sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed doquis eiusmod tempor eti incididunt. Ut labore et dolore magna aliquaut enim ad minim veniam,  nostrud exercitation ullamcoas  laboris nisi ut aliquip commodo.</h1>
 </aside>
 
 <Content content={data.portfolio} />

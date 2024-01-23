@@ -7,7 +7,9 @@
 </script>
 
 {#if $page.state.open}
-<dialog transition:fly={{ opacity: 1, y: '-100%', duration: 666 }}>
+<dialog transition:fly={{ opacity: 1, y: {
+  'contact': '-100%'
+}[$page.state.type] || '100%', duration: 666 }}>
   {#if $page.state.type === 'film'}
   <FilmPage data={$page.state.open} />
   {:else if $page.state.type === 'contact'}
