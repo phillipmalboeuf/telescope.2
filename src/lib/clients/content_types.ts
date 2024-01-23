@@ -87,6 +87,7 @@ export interface TypeFilmFields {
     synopsis?: EntryFieldTypes.RichText;
     prix?: EntryFieldTypes.RichText;
     creditList?: EntryFieldTypes.Text;
+    popup?: EntryFieldTypes.EntryLink<TypePopupSkeleton>;
     relatedContent?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeArticleSkeleton | TypeFilmSkeleton | TypeProductSkeleton>>;
 }
 
