@@ -77,7 +77,7 @@
         {film.fields[column.key] ? date(film.fields[column.key]) : '–'}
         {:else}
         {#if i === 0}
-        <a rel='prefetch'
+        <a
           on:click={async (e) => {
             if (e.metaKey) return;
 
@@ -86,7 +86,7 @@
             const result = await preloadData(href)
 
             if (result.type === 'loaded' && result.status === 200) {
-              pushState(href, { open: result.data })
+              pushState(href, { type: 'film', open: result.data })
             } else {
               goto(href)
             }

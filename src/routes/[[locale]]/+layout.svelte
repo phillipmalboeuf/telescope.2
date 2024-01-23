@@ -11,6 +11,12 @@
 	export let data: LayoutData
 </script>
 
+<svelte:head>
+  {#if $page.data.page}
+	<title>{$page.data.page.fields.title}</title>
+  {/if}
+</svelte:head>
+
 <Header header={data.header}  />
 
 <main class={$page.route.id.replace('/[[locale]]/', '').replace('/[id]', '')}>

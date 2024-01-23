@@ -20,7 +20,7 @@
     const result = await preloadData(href)
 
     if (result.type === 'loaded' && result.status === 200) {
-      pushState(href, { open: result.data })
+      pushState(href, { type: 'film', open: result.data })
     } else {
       goto(href)
     }

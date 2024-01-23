@@ -62,6 +62,7 @@ export interface TypeContactPointFields {
     linkLabel: EntryFieldTypes.Symbol;
     link: EntryFieldTypes.Symbol;
     publishedDate?: EntryFieldTypes.Date;
+    contacts?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeContactPersonSkeleton>>;
 }
 
 export type TypeContactPointSkeleton = EntrySkeletonType<TypeContactPointFields, "contactPoint">;

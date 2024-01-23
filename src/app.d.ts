@@ -6,7 +6,8 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		interface PageState {
-			open: any
+			type?: 'film' | 'contact'
+			open?: any
 		}
 		// interface Platform {}
 	}

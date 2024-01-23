@@ -2,10 +2,12 @@
   import { page } from '$app/stores'
   import Document from '$lib/components/document/index.svelte'
   import { fade, fly } from 'svelte/transition'
+  import { goto, preloadData, pushState } from '$app/navigation'
 
   import type { TypeLooseTextSkeleton, TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
   import { api } from '$lib/api';
+  
   export let header: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 
   let visible = false
@@ -16,14 +18,32 @@
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
     <div>
-      <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }} class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)} on:pointerenter={async () => {
-        visible = true
+      <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}
+        class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
+        on:click={async (e) => {
+          if (link.fields.link !== '/contact') return;
+          if (e.metaKey) return;
 
-        if (link.fields.link === "/about") {
-          // @ts-ignore
-          about = await api.get("/about")
-        }
-      }} on:pointerleave={() => about = undefined}>{link.fields.label}</a>
+          e.preventDefault()
+          const { href } = e.currentTarget
+          const result = await preloadData(href)
+
+          if (result.type === 'loaded' && result.status === 200) {
+            pushState(href, { type: 'contact', open: result.data })
+          } else {
+            goto(href)
+          }
+        }}
+        on:pointerenter={async () => {
+          visible = true
+
+          if (link.fields.link === "/about") {
+            // @ts-ignore
+            about = await api.get("/about")
+          }
+        }}
+        on:pointerleave={() => about = undefined}>{link.fields.label}</a>
+
       {#if $page.data.films && link.fields.link === "/films"}
       <ol>
         {#each $page.data.films as film}
@@ -93,6 +113,8 @@
         transition: opacity 333ms;
 
         &.active {
+          opacity: 1 !important;
+
           + ol {
             a {
               opacity: 1 !important;
@@ -144,7 +166,7 @@
         &:last-child {
           position: absolute;
           width: auto;
-          top: $base;
+          top: $base * 0.83333333;
           right: $base;
         }
       }
