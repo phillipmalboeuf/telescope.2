@@ -2,8 +2,13 @@
   import type { EntryCollection } from 'contentful'
   import type { TypeFilmSkeleton } from '$lib/clients/content_types'
   import { api } from '$lib/api';
-  import { date } from '$lib/formatters';
-  
+  import { date } from '$lib/formatters'
+  import { goto, preloadData, pushState } from '$app/navigation'
+
+  import { fade, fly } from 'svelte/transition'
+  import { page } from '$app/stores'
+
+  import FilmPage from '../../routes/[[locale]]/films/[id]/+page.svelte'
 
   export let labels: {
     open: string
@@ -74,7 +79,25 @@
         {:else if column.key.includes('Date')}
         {film.fields[column.key] ? date(film.fields[column.key]) : '–'}
         {:else}
+        {#if i === 0}
+        <a rel='prefetch'
+          on:click={async (e) => {
+            if (e.metaKey) return;
+
+            e.preventDefault()
+            const { href } = e.currentTarget
+            const result = await preloadData(href)
+
+            if (result.type === 'loaded' && result.status === 200) {
+              pushState(href, { open: result.data })
+            } else {
+              goto(href)
+            }
+          }}
+          href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>{film.fields[column.key]}</a>
+        {:else}
         {film.fields[column.key] ? film.fields[column.key] : '–'}
+        {/if}
         {/if}
       </td>
       {/each}
@@ -84,6 +107,14 @@
   </table>
   {/if}
 </section>
+
+{#if $page.state.open}
+<dialog transition:fly={{ opacity: 1, y: '-100%', duration: 666 }}>
+  <FilmPage data={$page.state.open} />
+
+  <button on:click={() => history.back()}>Fermer</button>
+</dialog>
+{/if}
 
 <style lang="scss">
   section {

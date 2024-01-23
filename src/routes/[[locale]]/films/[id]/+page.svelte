@@ -20,8 +20,8 @@
 	</nav>
 </Video>
 
-<aside>
-</aside>
+<!-- <aside>
+</aside> -->
 
 
 {#if data.director}

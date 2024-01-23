@@ -6,6 +6,8 @@
 
   import type { PageData } from './$types'
   import Media from '$lib/components/Media.svelte';
+  import ListFilm from '$lib/components/ListFilm.svelte'
+
   export let data: PageData
 
   const vedette = data.portfolio[0]
@@ -13,20 +15,14 @@
 
 
 <a rel='prefetch' href={`${$page.data.locale === 'fr' ? `/films/${vedette.fields.identifier}` : `/${$page.data.locale}/films/${vedette.fields.identifier}`}`}>
-  <figure>
-    <!-- {#if !$page.data.isMobile && item.fields.teaser}
-    <ListVideo src={item.fields.animationList || item.fields.teaser}
-      poster={item.fields.poster && `${item.fields.poster.fields.file.url}?w=900`} />
-    {:else}
-    <Picture media={item.fields.poster} />
-    {/if} -->
+  <ListFilm film={vedette} full wide />
+  <!-- <figure>
     <Media media={vedette.fields.poster} />
     <figcaption>
       <h6>{vedette.fields.title}</h6>
       {#if vedette.fields.ralisateur}<h6>{vedette.fields.ralisateur}</h6>{/if}
-      <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
-  </figure>
+  </figure> -->
 </a>
 
 <aside>
@@ -48,36 +44,5 @@
   aside {
     padding: $base;
     background-color: $white;
-  }
-
-  figure {
-    display: block;
-
-    :global(img),
-    :global(video) {
-      height: 100vh;
-      object-fit: cover;
-    }
-
-    figcaption {
-      position: absolute;
-      z-index: var(--index);
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      color: var(--foreground-inverse);
-      padding: $base;
-
-      :global(.films) & {
-        color: var(--foreground);
-      }
-
-      display: flex;
-      transform: translate3d(0,0,0);
-
-      h6 {
-        flex: 1;
-      }
-    }
   }
 </style>

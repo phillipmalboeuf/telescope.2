@@ -13,9 +13,6 @@ export const load = (async ({ locals, url, params }) => {
     })
   ])
 
-  console.log(films)
-  console.log(params.id)
-
   return {
     director: director.items[0],
     portfolio: films.items
