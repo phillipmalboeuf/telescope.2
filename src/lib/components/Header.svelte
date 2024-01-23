@@ -77,7 +77,7 @@
     top: 0;
     left: 0;
     width: 100vw;
-    padding: $base;
+    padding: $base 0;
     background-color: fade-out($white, 1);
     transition: height 666ms, background-color 666ms;
     pointer-events: none;
@@ -140,9 +140,9 @@
       div {
         width: calc(100% / var(--length));
         transition: border-color 666ms;
+        padding: 0 ($base * 0.75);
         
         &:not(:first-child):not(:last-child) {
-          padding: 0 ($base * 0.75);
           border-left: 1px solid transparent;
         }
 
@@ -167,7 +167,7 @@
           position: absolute;
           width: auto;
           top: $base * 0.83333333;
-          right: $base;
+          right: 0;
         }
       }
 

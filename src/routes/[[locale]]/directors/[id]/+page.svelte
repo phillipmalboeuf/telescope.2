@@ -44,5 +44,8 @@
   aside {
     padding: $base;
     background-color: $white;
+
+    position: relative;
+    z-index: 10;
   }
 </style>

@@ -36,7 +36,8 @@
     <Media media={film.fields.poster} ar={wide ? undefined : full ? 1 : undefined} small />
     <figcaption>
       <h6>{film.fields.title}</h6>
-      {#if film.fields.ralisateur}<h6>{film.fields.ralisateur}</h6>{/if}
+      <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
+      <h6></h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
   </figure>
@@ -71,7 +72,7 @@
       z-index: var(--index);
       bottom: 0;
       color: var(--foreground-inverse);
-      padding: $base;
+      padding: $base 0;
 
       :global(.films) & {
         color: var(--foreground);
@@ -81,7 +82,12 @@
       transform: translate3d(0,0,0);
 
       h6 {
-        flex: 1;
+        flex: 2;
+        padding: 0 $base;
+
+        &:last-child {
+          flex: 1;
+        }
       }
     }
   }
