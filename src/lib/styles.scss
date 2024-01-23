@@ -108,22 +108,11 @@ svg {
 	} 
 }
 
-dialog {
-	display: block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100vh;
-	overflow-y: auto;
-	width: 100vw;
-	z-index: 2000;
-	background-color: $black;
+table {
 
-	> button {
-		position: absolute;
-		top: $base;
-		right: $base;
-		z-index: 2001;
+	td,
+	th {
+		white-space: pre-line;
 	}
 }
 

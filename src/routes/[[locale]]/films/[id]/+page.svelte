@@ -5,8 +5,9 @@
   import { page } from '$app/stores'
 
   import type { PageData } from './$types'
-  import Media from '$lib/components/Media.svelte';
+  import Media from '$lib/components/Media.svelte'
   import Video from '$lib/components/Video.svelte'
+  import Document from '$lib/components/document/index.svelte'
   export let data: PageData
 
 </script>
@@ -20,8 +21,44 @@
 	</nav>
 </Video>
 
-<!-- <aside>
-</aside> -->
+{#if data.film.fields.description}
+<main>
+  <div>
+    <h4>Film</h4>
+    <Document body={data.film.fields.description} />
+  </div>
+  {#if data.film.fields.distribution}
+  <div>
+    <h4>Distributions</h4>
+    <Document body={data.film.fields.distribution} />
+  </div>
+  {/if}
+  {#if data.film.fields.synopsis}
+  <div>
+    <h4>Synopsis</h4>
+    <Document body={data.film.fields.synopsis} />
+  </div>
+  {/if}
+  {#if data.film.fields.prix}
+  <div>
+    <h4>Prix et distinctions</h4>
+    <Document body={data.film.fields.prix} />
+  </div>
+  {/if}
+</main>
+{/if}
+
+{#if data.film.fields.screenGrabs}
+<ol>
+  {#each data.film.fields.screenGrabs as grab}
+  <li>
+    <figure>
+      <Media media={grab.fields.thumbnail} small />
+    </figure>
+  </li>
+  {/each}
+</ol>
+{/if}
 
 
 {#if data.director}
@@ -36,9 +73,57 @@
 {/if}
 
 <style lang="scss">
-  aside {
+  main {
     padding: $base;
-    background-color: $white;
+    display: flex;
+    
+    :global(html:has(.films)) & {
+      background-color: $black-light;
+
+      h4,
+      :global(em) {
+        color: $grey;
+        font-style: normal;
+      }
+    }
+
+    > div {
+      flex: 1;
+      padding-right: $base;
+
+      :global(html:has(.films)) & {
+        border-color: $grey;
+      }
+
+      &:not(:last-child) { border-right: 1px solid; }
+      &:not(:first-child) { padding-left: $base; }
+
+      h4 {
+        margin-bottom: 20vh;
+      }
+
+      :global(td),
+      :global(th) {
+        padding-bottom: $base * 0.5;
+      }
+    }
+  }
+
+  ol {
+    list-style: none;
+
+    figure {
+      width: 50%;
+    }
+
+    li {
+
+      &:nth-child(2n) {
+        figure {
+          margin-left: auto;
+        }
+      }
+    }
   }
 
   nav {

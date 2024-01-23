@@ -5,10 +5,7 @@
   import { date } from '$lib/formatters'
   import { goto, preloadData, pushState } from '$app/navigation'
 
-  import { fade, fly } from 'svelte/transition'
   import { page } from '$app/stores'
-
-  import FilmPage from '../../routes/[[locale]]/films/[id]/+page.svelte'
 
   export let labels: {
     open: string
@@ -107,14 +104,6 @@
   </table>
   {/if}
 </section>
-
-{#if $page.state.open}
-<dialog transition:fly={{ opacity: 1, y: '-100%', duration: 666 }}>
-  <FilmPage data={$page.state.open} />
-
-  <button on:click={() => history.back()}>Fermer</button>
-</dialog>
-{/if}
 
 <style lang="scss">
   section {

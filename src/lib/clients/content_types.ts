@@ -82,6 +82,9 @@ export interface TypeFilmFields {
     screenGrabs?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeScreenGrabSkeleton>>;
     crew?: EntryFieldTypes.RichText;
     description?: EntryFieldTypes.RichText;
+    distribution?: EntryFieldTypes.RichText;
+    synopsis?: EntryFieldTypes.RichText;
+    prix?: EntryFieldTypes.RichText;
     creditList?: EntryFieldTypes.Text;
     relatedContent?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeArticleSkeleton | TypeFilmSkeleton | TypeProductSkeleton>>;
 }

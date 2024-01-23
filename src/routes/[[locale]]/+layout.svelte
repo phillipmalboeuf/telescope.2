@@ -5,6 +5,7 @@
 
 	import Footer from '$lib/components/Footer.svelte'
   import Header from '$lib/components/Header.svelte'
+  import Dialog from '$lib/components/Dialog.svelte'
 
   import type { LayoutData } from './$types'
 	export let data: LayoutData
@@ -16,6 +17,7 @@
   <slot />
 </main>
 
+<Dialog />
 <Footer footer={data.footer} />
 
 <style lang="scss">

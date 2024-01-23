@@ -1,13 +1,10 @@
 <script lang="ts">
   import type { TypeFilmSkeleton } from '$lib/clients/content_types';
   import type { Entry } from 'contentful'
-  import { fade, fly } from 'svelte/transition'
 
   import { page } from '$app/stores'
   import Media from './Media.svelte'
   import { goto, preloadData, pushState } from '$app/navigation'
-
-  import FilmPage from '../../routes/[[locale]]/films/[id]/+page.svelte'
 
   export let film: Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
   export let full = false
@@ -44,14 +41,6 @@
     </figcaption>
   </figure>
 </a>
-
-{#if $page.state.open && $page.state.open.film.fields.identifier === film.fields.identifier}
-<dialog transition:fly={{ opacity: 1, y: '-100%', duration: 666 }}>
-  <FilmPage data={$page.state.open} />
-
-  <button on:click={() => history.back()}>Fermer</button>
-</dialog>
-{/if}
 
 <style lang="scss">
   figure {
