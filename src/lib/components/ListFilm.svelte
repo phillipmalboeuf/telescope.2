@@ -42,7 +42,7 @@
     {:else}
     <Picture media={item.fields.poster} />
     {/if} -->
-    <Media media={film.fields.poster} ar={wide ? undefined : full ? 1 : undefined} small />
+    <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small />
     {#if film.fields.popup && popup}
     <figcaption class="popup" transition:fly={{ y: '100%', duration: 333 }}>
       <div>
@@ -148,7 +148,7 @@
       &.popup {
         position: absolute;
         padding: $base;
-        background-color: fade-out($white, 0.75);
+        // background-color: fade-out($white, 0.75);
         -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
 
