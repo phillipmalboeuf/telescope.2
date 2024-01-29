@@ -10,7 +10,7 @@
 
 <Content content={data.page.fields.content} />
 
-<Table labels={{ open: 'Voir tous les projets', close: 'Projets commerciaux' }}
+<Table tag='Commercial,videoclip' labels={{ open: 'Voir tous les projets', close: 'Projets commerciaux' }}
   columns={[
     { label: 'Projet', key: 'title' },
     { label: 'Client', key: 'client' },

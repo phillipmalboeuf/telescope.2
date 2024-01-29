@@ -31,7 +31,7 @@
 
 <Content content={data.portfolio} />
 
-<Table labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.director.fields.name}` }}
+<Table director={data.director.fields.tagIdentifier} labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.director.fields.name}` }}
   columns={[
     { label: 'Projet', key: 'title' },
     { label: 'Client', key: 'client' },

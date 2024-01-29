@@ -17,6 +17,9 @@
     label: string
   }[]
 
+  export let director: string = undefined
+  export let tag: string = undefined
+
   let open = false
   let data: EntryCollection<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS"> = undefined
   let filter: string = undefined
@@ -31,7 +34,7 @@
       open = !open
 
       // @ts-ignore
-      data = await api.get("/films")
+      data = await api.get(`/films${director ? `?director=${director}` : ''}${tag ? `?tag=${tag}` : ''}`)
       tags = [...new Set(data.items.reduce((ts, item)=> {
         return [
           ...ts,
