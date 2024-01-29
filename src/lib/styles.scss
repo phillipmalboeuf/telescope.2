@@ -153,3 +153,7 @@ table {
 	width: 1px;
 	white-space: nowrap;
 }
+
+[id] {
+	scroll-margin-top: $base * 8;
+}

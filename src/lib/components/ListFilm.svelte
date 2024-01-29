@@ -74,7 +74,10 @@
       {/if}
       <h6>{film.fields.title}</h6>
       <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
-      <h6>{#if film.fields.publishedDate}{date(film.fields.publishedDate)}{/if}</h6>
+      <h6>{#if film.fields.status}<span class={film.fields.status}>{@html `${{
+        'Distribution': 'En&nbsp;distribution',
+        'Production': 'En&nbsp;production'
+      }[film.fields.status]}`}</span>{:else if film.fields.publishedDate}{year(film.fields.publishedDate)}{/if}</h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
     {/if}
@@ -142,6 +145,22 @@
         &:last-child {
           flex: 1;
           text-align: right;
+        }
+
+        .Distribution,
+        .Production {
+          display: flex;
+          gap: $base * 0.5;
+          align-items: center;
+
+          &:before {
+            content: "";
+            display: inline-block;
+            width: $base * 0.5555;
+            height: $base * 0.5555;
+            border-radius: 50%;
+            background-color: $green;
+          }
         }
       }
 
