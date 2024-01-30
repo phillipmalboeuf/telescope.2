@@ -42,13 +42,28 @@
     color: var(--foreground-inverse);
     background-color: var(--background-inverse);
     padding: $base;
+
+    display: flex;
+    flex-direction: column;
+    gap: $base;
+
+    @media (max-width: $mobile) {
+      padding: $mobile_base;
+      gap: $mobile_base * $mobile_scale * 2;
+    }
     
     > :global(svg) {
       width: 100%;
+      height: auto;
+
+      @media (max-width: $mobile) {
+        order: -1;
+      }
     }
 
     nav {
       display: flex;
+      flex-wrap: wrap;
 
       div {
         flex: 1;
@@ -63,11 +78,33 @@
           flex: 2;
         }
 
+        @media (max-width: $mobile) {
+          flex: none !important;
+          width: 50%;
+          margin-bottom: 0;
+
+          &:not(:first-child) {
+            padding-left: $mobile_base;
+          }
+
+          &:first-child {
+            display: none;
+          }
+
+          &:last-child {
+            width: 100%;
+          }
+        }
+
         ul {
           list-style: none;
           margin: $gap 0 ($gap * 6);
 
           color: $grey;
+
+          @media (max-width: $mobile) {
+            margin-bottom: $gap * 3;
+          }
         }
 
         aside {

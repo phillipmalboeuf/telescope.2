@@ -76,6 +76,11 @@
   main {
     padding: $base;
     display: flex;
+
+    @media (max-width: $mobile) {
+      flex-direction: column;
+      padding: $mobile_base;
+    }
     
     :global(html:has(.films)) & {
       background-color: $black-light;
@@ -105,6 +110,26 @@
       :global(td),
       :global(th) {
         padding-bottom: $base * 0.5;
+      }
+
+      :global(em) {
+        font-style: normal;
+        opacity: 0.5;
+      }
+
+      @media (max-width: $mobile) {
+        padding: $mobile_base 0 ($mobile_base * $mobile_scale * 2) !important;
+        border-right: none !important;
+        border-bottom: 1px solid;
+
+        h4 {
+          margin-bottom: $mobile_base;
+        }
+
+        &:first-child {
+          padding-top: 0 !important;
+          h4 { display: none; }
+        }
       }
     }
   }

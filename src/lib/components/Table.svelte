@@ -115,14 +115,26 @@
     z-index: 998;
     background-color: $white;
 
+    @media (max-width: $mobile) {
+      padding: $mobile_base;
+    }
+
     button:has(h2) {
       background-color: transparent !important;
+      text-align: left;
+      padding: 0;
     }
 
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: $gap;
+
+      @media (max-width: $mobile) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
       > div {
         display: flex;

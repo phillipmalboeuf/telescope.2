@@ -57,35 +57,63 @@ h1, h2, h3, h4, h5, h6,
 h1,
 .h1 {
 	font-size: $base * $scale * 3;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base * $mobile_scale * 3;
+  }
 }
 
 h2,
 .h2 {
 	font-size: $base * $scale * 2;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base * $mobile_scale * 2;
+  }
 }
 
 h3,
 .h3 {
 	font-size: $base * $scale * 1;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base * $mobile_scale * 1;
+  }
 }
 
 h4,
 .h4 {
 	font-size: $base;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base;
+  }
 }
 
 h5,
 .h5 {
 	font-size: $base;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base;
+  }
 }
 
 h6,
 .h6 {
 	font-size: $base;
+
+	@media (max-width: $mobile) {
+    font-size: $mobile_base;
+  }
 }
 
 p {
 	line-height: $scale;
+
+	@media (max-width: $mobile) {
+    line-height: $mobile_scale;
+  }
 }
 
 a {

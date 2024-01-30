@@ -40,6 +40,12 @@
       top: $base * 0.83333333;
       right: $base;
       z-index: 2001;
+
+      @media (max-width: $mobile) {
+        font-size: $mobile_base * $mobile_scale;
+        top: $mobile_base * 0.83333333;
+        right: $mobile_base;
+      }
     }
   }
 </style>

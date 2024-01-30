@@ -48,7 +48,7 @@
 <!-- {JSON.stringify(media, null, 2)} -->
 <picture>
   {#if small}
-  <source srcSet="{cdn(media.fields.file.url)}?w=400{ar ? `&fit=crop&h=${Math.round(400 * ar)}` : ''}" media="(max-width: 900px)" />
+  <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(400 * ar)}` : ''}" media="(max-width: 900px)" />
   <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(600 * ar)}` : ''}" media="(max-width: 1200px)" />
   <img src="{cdn(media.fields.file.url)}?w=800{ar ? `&fit=crop&h=${Math.round(800 * ar)}` : ''}"
     style={ar ? `aspect-ratio: 800 / ${Math.round(ar * 800) + 2}` : ''}

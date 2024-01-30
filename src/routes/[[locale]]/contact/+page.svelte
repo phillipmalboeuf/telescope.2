@@ -57,11 +57,29 @@
 
     display: flex;
 
+    @media (max-width: $mobile) {
+      flex-direction: column;
+    }
+
     nav {
       flex: 1;
       padding: 0 $base;
 
       &:not(:first-child):not(:last-child) { border-left: 1px solid $grey; }
+
+      @media (max-width: $mobile) {
+        border-left: none !important;
+
+        &:not(:first-child):not(:last-child) {
+          border-top: 1px solid $grey;
+          padding-top: $mobile_base;
+        }
+
+        > a,
+        > h4 {
+          font-size: $mobile_base * $mobile_scale * 1.15;
+        }
+      }
 
       a.inactive {
         color: $grey;
@@ -69,6 +87,10 @@
 
       h4 {
         margin-bottom: 20vh;
+
+        @media (max-width: $mobile) {
+          margin-bottom: $mobile_base * $mobile_scale;
+        }
       }
 
       > a {

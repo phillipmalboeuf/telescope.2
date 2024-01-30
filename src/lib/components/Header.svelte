@@ -14,13 +14,15 @@
   let about: Entry<TypeLooseTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS"> = undefined
 </script>
 
-<header class:visible on:pointerleave={() => visible = false}>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<header class:visible on:mouseleave={() => visible = false}>
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
     <div>
       <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}
         class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
         on:click={async (e) => {
+          visible = false
           if (link.fields.link !== '/contact') return;
           if (e.metaKey) return;
 
@@ -66,6 +68,7 @@
     </div>
    
     {/each}
+    <small><a href="/en">English</a></small>
     <div><button on:click={()=> visible = !visible}>{#if visible}Fermer{:else}Menu{/if}</button></div>
   </nav>
 </header>
@@ -91,6 +94,7 @@
 
     nav {
       display: flex;
+      flex-wrap: wrap;
 
       &:has(a.active) a:not(.active) {
         opacity: 0.4;
@@ -184,6 +188,14 @@
           top: $base * 0.83333333;
           right: 0;
         }
+
+        @media (max-width: $mobile) {
+          &:first-child {
+            a {
+              opacity: 1 !important;
+            }
+          }
+        }
       }
 
       // div {
@@ -191,6 +203,33 @@
       //   top: $base - ($base * $scale * 0.125);
       //   right: $base - ($base * $scale * 0.333);
       // }
+    }
+
+    small {
+      display: none;
+      padding: 0 ($base * 0.75);
+    }
+
+    @media (max-width: $mobile) {
+      padding: $mobile_base 0;
+
+      a {
+        font-size: $mobile_base * $mobile_scale * 1.15;
+      }
+
+      small a {
+        font-size: $mobile_base * $mobile_scale;
+      }
+
+      button {
+        font-size: $mobile_base * $mobile_scale;
+      }
+
+      &:not(.visible) {
+        nav > div {
+          &:not(:first-child):not(:last-child) { display: none; }
+        }
+      }
     }
 
     &.visible {
@@ -203,18 +242,47 @@
         background-color: fade-out($black-light, 0.5);
       }
 
+      @media (max-width: $mobile) {
+        small {
+          display: block;
+          margin-top: auto;
+        }
+
+        nav {
+          min-height: 50vh;
+          flex-direction: column;
+        }
+      }
+
       ol,
       aside {
         opacity: 1;
         visibility: visible;
+
+        @media (max-width: $mobile) {
+          display: none;
+        }
       }
 
       nav div {
+        &:first-child {
+          @media (max-width: $mobile) {
+            margin-bottom: $mobile_base * $mobile_scale * 2;
+          }
+        }
         &:not(:first-child) {
           border-color: fade-out($color: $black, $amount: 0.75);
 
           :global(html:has(.films)) & {
             border-color: fade-out($color: $white, $amount: 0.75);
+          }
+
+          @media (max-width: $mobile) {
+            border: none !important;
+
+            &:not(:last-child) {
+              width: 100%;
+            }
           }
         }
 

@@ -110,6 +110,7 @@
     }
 
     figcaption {
+      position: -webkit-sticky;
       position: sticky;
       z-index: var(--index);
       bottom: 0;
@@ -125,9 +126,19 @@
       align-items: flex-end;
       transform: translate3d(0,0,0);
 
+      @media (max-width: $mobile) {
+        position: absolute;
+        width: 100%;
+        padding: $mobile_base 0;
+      }
+
       aside {
         width: 100%;
         padding: $base;
+
+        @media (max-width: $mobile) {
+          order: -1;
+        }
 
         button {
           padding: ($base * $scale * 0.25) ($base * $scale * 0.5);
@@ -142,9 +153,27 @@
         flex: 2;
         padding: 0 $base;
 
+        @media (max-width: $mobile) {
+          padding: 0 $mobile_base;
+        }
+
         &:last-child {
           flex: 1;
           text-align: right;
+        }
+
+        @media (max-width: $mobile) {
+          flex: none;
+          width: 50%;
+
+          &:last-child {
+            // text-align: left;
+          }
+
+          &:nth-of-type(1) {
+            // order: -1;
+            width: 100%;
+          }
         }
 
         .Distribution,
@@ -152,6 +181,7 @@
           display: flex;
           gap: $base * 0.5;
           align-items: center;
+          justify-content: flex-end;
 
           &:before {
             content: "";
@@ -174,8 +204,18 @@
         align-items: stretch;
         min-height: 50vh;
 
+        @media (max-width: $mobile) {
+          padding: $mobile_base;
+        }
+
         div {
           flex: 1;
+
+          @media (max-width: $mobile) {
+            flex: none;
+            width: 100%;
+          }
+
           display: flex;
           flex-direction: column;
 

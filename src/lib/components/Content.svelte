@@ -28,6 +28,10 @@
 
     li {
       width: 50%;
+
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
     }
   }
 </style>
