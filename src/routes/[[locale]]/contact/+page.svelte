@@ -58,6 +58,7 @@
     display: flex;
 
     @media (max-width: $mobile) {
+      padding: $mobile_base 0;
       flex-direction: column;
     }
 
@@ -69,6 +70,7 @@
 
       @media (max-width: $mobile) {
         border-left: none !important;
+        padding: 0 $mobile_base;
 
         &:not(:first-child):not(:last-child) {
           border-top: 1px solid $grey;

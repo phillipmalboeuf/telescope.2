@@ -12,6 +12,9 @@
 
   let visible = false
   let about: Entry<TypeLooseTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS"> = undefined
+
+  let films = false
+  let directors = false
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -23,6 +26,9 @@
         class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
         on:click={async (e) => {
           visible = false
+          films = false
+          directors = false
+
           if (link.fields.link !== '/contact') return;
           if (e.metaKey) return;
 
@@ -36,10 +42,30 @@
             goto(href)
           }
         }}
+        on:touchstart={(e) => {
+          if (["/films", "/directors", "/about"].includes(link.fields.link)) {
+            e.preventDefault()
+            e.stopImmediatePropagation()
+          }
+
+          if (link.fields.link === "/films") {
+            films = true
+            directors = false
+            about = undefined
+          }
+
+          if (link.fields.link === "/directors") {
+            directors = true
+            films = false
+            about = undefined
+          }
+        }}
         on:pointerenter={async () => {
           visible = true
 
           if (link.fields.link === "/about") {
+            directors = false
+            films = false
             // @ts-ignore
             about = await api.get("/about")
           }
@@ -47,7 +73,7 @@
         on:pointerleave={() => about = undefined}>{link.fields.label}</a>
 
       {#if $page.data.films && link.fields.link === "/films"}
-      <ol>
+      <ol class:films>
         {#each $page.data.films as film}
         <li><a href="/films/{film.fields.identifier}">{film.fields.title}</a></li>
         {/each}
@@ -55,7 +81,7 @@
       {/if}
 
       {#if $page.data.directors && link.fields.link === "/directors"}
-      <ol>
+      <ol class:directors>
         {#each $page.data.directors as director}
         <li><a href="/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
         {/each}
@@ -63,13 +89,17 @@
       {/if}
 
       {#if about && link.fields.link === "/about"}
-      <aside transition:fade={{ duration: 333 }}><Document body={about.fields.body} /></aside>
+      <aside class:about><Document body={about.fields.body} /></aside>
       {/if}
     </div>
    
     {/each}
     <small><a href="/en">English</a></small>
-    <div><button on:click={()=> visible = !visible}>{#if visible}Fermer{:else}Menu{/if}</button></div>
+    <div><button on:click={()=> {
+      visible = !visible
+      films = false
+      directors = false
+    }}>{#if visible}Fermer{:else}Menu{/if}</button></div>
   </nav>
 </header>
 
@@ -261,6 +291,29 @@
 
         @media (max-width: $mobile) {
           display: none;
+
+          &.films,
+          &.directors,
+          &.about {
+            display: block;
+            font-size: $mobile_base;
+            position: absolute;
+            top: $mobile_base * $mobile_scale * 2.15;
+            right: 0;
+            bottom: $mobile_base;
+            border-left: 1px solid;
+            padding-left: $mobile_base;;
+            width: 50%;
+            overflow-y: auto;
+
+            li {
+              margin-bottom: 0;
+
+              a {
+                font-size: $mobile_base * $mobile_scale;
+              }
+            }
+          }
         }
       }
 
