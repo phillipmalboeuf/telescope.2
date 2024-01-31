@@ -86,10 +86,9 @@
 
 <style lang="scss">
   figure {
-    position: relative;
     display: block;
     height: 50vh;
-    // overflow: hidden;
+    filter: blur(0.0001px);
     // margin-top: $base * -3;
 
     :global(img),
@@ -124,7 +123,6 @@
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
-      transform: translate3d(0,0,0);
 
       @media (max-width: $mobile) {
         position: absolute;
