@@ -11,12 +11,16 @@
   import { goto, preloadData, pushState } from '$app/navigation'
   import { date, year } from '$lib/formatters'
   import type { MouseEventHandler } from 'svelte/elements'
+  import { onMount } from 'svelte';
+  import { boxes } from '$lib/collides';
 
+  export let i: number
   export let film: Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
   export let full = false
   export let wide = false
 
   let popup = false
+  let element: HTMLElement
 
   const go: MouseEventHandler<HTMLAnchorElement> = async (e) => {
     if (e.metaKey) return;
@@ -31,11 +35,19 @@
       goto(href)
     }
   }
+
+  onMount(() => {
+    boxes.update((value) => ({ ...value, [i]: element }))
+
+    return () => {
+      boxes.update((value) => ({ ...value, [i]: undefined }))
+    }
+  })
 </script>
 
 <a on:click={go}
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
-  <figure class:full class:wide>
+  <figure bind:this={element} class:full class:wide>
     <!-- {#if !$page.data.isMobile && item.fields.teaser}
     <ListVideo src={item.fields.animationList || item.fields.teaser}
       poster={item.fields.poster && `${item.fields.poster.fields.file.url}?w=900`} />

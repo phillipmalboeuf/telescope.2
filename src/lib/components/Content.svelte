@@ -13,7 +13,7 @@
 {#each films as item, i}
   {#if item.sys.contentType.sys.id === 'film'}
   <li class:full={item.fields.full} style="--index: {i}; --index-reverse: {films.length - i}">
-    <ListFilm film={item} full={item.fields.full} />
+    <ListFilm {i} film={item} full={item.fields.full} />
   </li>
   {/if}
 {/each}

@@ -6,7 +6,9 @@
 
   import type { TypeLooseTextSkeleton, TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
-  import { api } from '$lib/api';
+  
+  import { api } from '$lib/api'
+  import { collides } from '$lib/collides'
   
   export let header: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 
@@ -24,6 +26,7 @@
     <div>
       <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}
         class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
+        use:collides
         on:click={async (e) => {
           visible = false
           films = false
@@ -116,10 +119,13 @@
     pointer-events: none;
 
     &:not(.visible) {
-      @supports (mix-blend-mode: exclusion) {
-        color: white;
-        mix-blend-mode: exclusion;
+      a.collides {
+        color: $white !important;
       }
+      // @supports (mix-blend-mode: exclusion) {
+      //   color: white;
+      //   mix-blend-mode: exclusion;
+      // }
     }
 
     nav {

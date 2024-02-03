@@ -15,7 +15,7 @@
 
 
 <a rel='prefetch' href={`${$page.data.locale === 'fr' ? `/films/${vedette.fields.identifier}` : `/${$page.data.locale}/films/${vedette.fields.identifier}`}`}>
-  <ListFilm film={vedette} full wide />
+  <ListFilm i={0} film={vedette} full wide />
   <!-- <figure>
     <Media media={vedette.fields.poster} />
     <figcaption>
