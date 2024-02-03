@@ -65,6 +65,15 @@
       display: flex;
       flex-wrap: wrap;
 
+      a {
+        transition: color 333ms;
+        
+        &:hover,
+        &:focus {
+          color: var(--foreground-inverse);
+        }
+      }
+
       div {
         flex: 1;
         margin-bottom: $gap;
@@ -76,6 +85,21 @@
 
         &:last-child {
           flex: 2;
+
+          @media (min-width: $mobile) {
+            ul {
+              display: flex;
+              flex-wrap: wrap;
+
+              li {
+                width: 50%;
+
+                &:nth-child(n + 3) {
+                  margin-left: 50%;
+                }
+              }
+            }
+          }
         }
 
         @media (max-width: $mobile) {

@@ -26,7 +26,6 @@
     <div>
       <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}
         class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
-        use:collides
         on:click={async (e) => {
           visible = false
           films = false
@@ -73,7 +72,7 @@
             about = await api.get("/about")
           }
         }}
-        on:pointerleave={() => about = undefined}>{link.fields.label}</a>
+        on:pointerleave={() => about = undefined}><span use:collides>{link.fields.label}</span></a>
 
       {#if $page.data.films && link.fields.link === "/films"}
       <ol class:films>
@@ -119,7 +118,7 @@
     pointer-events: none;
 
     &:not(.visible) {
-      a.collides {
+      .collides {
         color: $white !important;
       }
       // @supports (mix-blend-mode: exclusion) {
