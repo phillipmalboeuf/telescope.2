@@ -112,15 +112,15 @@
     width: 100vw;
     padding: $base 0;
     background-color: fade-out($white, 1);
-    transition: height 666ms, background-color 666ms;
+    transition: height 666ms, background-color 666ms, -webkit-backdrop-filter 666ms, backdrop-filter 666ms;
     pointer-events: none;
 
-    &:not(.visible) {
-      @supports (mix-blend-mode: exclusion) {
-        color: white;
-        mix-blend-mode: exclusion;
-      }
-    }
+    // &:not(.visible) {
+    //   @supports (mix-blend-mode: exclusion) {
+    //     color: white;
+    //     mix-blend-mode: exclusion;
+    //   }
+    // }
 
     nav {
       display: flex;
