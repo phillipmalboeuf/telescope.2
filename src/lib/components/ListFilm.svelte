@@ -103,6 +103,7 @@
 
       &:not(.full):before {
         content: "";
+        pointer-events: none;
         display: block;
         position: absolute;
         bottom: 100%;
