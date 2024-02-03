@@ -14,16 +14,9 @@
 </script>
 
 
-<a rel='prefetch' href={`${$page.data.locale === 'fr' ? `/films/${vedette.fields.identifier}` : `/${$page.data.locale}/films/${vedette.fields.identifier}`}`}>
-  <ListFilm i={0} film={vedette} full wide />
-  <!-- <figure>
-    <Media media={vedette.fields.poster} />
-    <figcaption>
-      <h6>{vedette.fields.title}</h6>
-      {#if vedette.fields.ralisateur}<h6>{vedette.fields.ralisateur}</h6>{/if}
-    </figcaption>
-  </figure> -->
-</a>
+<figure>
+  <ListFilm i={1000} film={vedette} full wide />
+</figure>
 
 <aside>
   <h1 class="h2">{data.director.fields.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; information sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed doquis eiusmod tempor eti incididunt. Ut labore et dolore magna aliquaut enim ad minim veniam,  nostrud exercitation ullamcoas  laboris nisi ut aliquip commodo.</h1>
@@ -41,11 +34,17 @@
   ]} />
 
 <style lang="scss">
+  figure {
+    display: block;
+    position: relative;
+    z-index: 100;
+  }
+
   aside {
     padding: $base;
     background-color: $white;
 
     position: relative;
-    z-index: 10;
+    z-index: 110;
   }
 </style>

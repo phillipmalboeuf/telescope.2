@@ -15,7 +15,11 @@ export const boxes = writable<{ [i: number]: HTMLElement }>({})
 
 export const collides: Action<HTMLElement> = (node) => {
   let $boxes: { [i: number]: HTMLElement }
-  boxes.subscribe((value) => $boxes = value)
+  boxes.subscribe((value) => {
+    $boxes = value
+
+    checkCollisions()
+  })
 
   function checkCollisions() {
     const us = node.getBoundingClientRect()

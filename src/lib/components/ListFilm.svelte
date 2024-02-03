@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { TypeFilmSkeleton } from '$lib/clients/content_types';
+  import type { TypeFilmSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
 
   import { page } from '$app/stores'
