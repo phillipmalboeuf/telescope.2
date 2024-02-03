@@ -203,7 +203,7 @@
           // margin-left: calc(50% / var(--length));
         }
 
-        &:nth-last-child(2) {
+        &:nth-last-child(3) {
           border-color: transparent !important;
         }
 
