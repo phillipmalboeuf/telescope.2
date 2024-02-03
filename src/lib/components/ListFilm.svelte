@@ -87,6 +87,7 @@
 <style lang="scss">
   figure {
     display: block;
+    position: relative;
     height: 50vh;
     filter: blur(0.0001px);
     // margin-top: $base * -3;
@@ -97,6 +98,17 @@
       object-fit: cover;
       position: relative;
       z-index: var(--index);
+    }
+
+    &:not(.full):before {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      height: 50vh;
+      width: 100%;
+      background-color: var(--background);
     }
 
     &.full {
