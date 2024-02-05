@@ -5,12 +5,16 @@
   import { page } from '$app/stores'
 
   import type { PageData } from './$types'
-  import Media from '$lib/components/Media.svelte';
+  import Media from '$lib/components/Media.svelte'
   import ListFilm from '$lib/components/ListFilm.svelte'
 
   export let data: PageData
 
-  const vedette = data.portfolio[0]
+  let vedette
+
+  $: {
+    vedette = data.portfolio[0]
+  }
 </script>
 
 

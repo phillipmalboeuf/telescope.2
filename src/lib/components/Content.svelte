@@ -1,18 +1,16 @@
 <script lang="ts">
-  import type { TypeAboutPieceSkeleton, TypeArticleSkeleton, TypeCollaboratorSkeleton, TypeCollaboratorSliderSkeleton, TypeContactPersonSkeleton, TypeContactPointSkeleton, TypeFilmSkeleton, TypeLooseTextSkeleton } from '$lib/clients/content_types'
+  import { isTypeFilm, type TypeAboutPieceSkeleton, type TypeArticleSkeleton, type TypeCollaboratorSkeleton, type TypeCollaboratorSliderSkeleton, type TypeContactPersonSkeleton, type TypeContactPointSkeleton, type TypeFilmSkeleton, type TypeLooseTextSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
-  import ListFilm from './ListFilm.svelte';
+  import ListFilm from './ListFilm.svelte'
 
   export let query: string = undefined
   export let content: Entry<TypeAboutPieceSkeleton | TypeArticleSkeleton | TypeCollaboratorSkeleton | TypeCollaboratorSliderSkeleton | TypeContactPersonSkeleton | TypeContactPointSkeleton | TypeFilmSkeleton | TypeLooseTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">[]
-
-  let films = content.filter(item => item.sys.contentType.sys.id === 'film') as Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">[]
 </script>
 
 <ol>
-{#each films as item, i}
-  {#if item.sys.contentType.sys.id === 'film'}
-  <li class:full={item.fields.full} style="--index: {i}; --index-reverse: {films.length - i}">
+{#each content as item, i (item.sys.id)}
+  {#if isTypeFilm(item)}
+  <li class:full={item.fields.full} style="--index: {i}; --index-reverse: {content.length - i}">
     <ListFilm {i} film={item} full={item.fields.full} />
   </li>
   {/if}
