@@ -13,7 +13,7 @@
 <Table tag='film' labels={{ open: 'Voir tous les films', close: 'Films' }}
   columns={[
     { label: 'Projet', key: 'title' },
-    { label: 'Client', key: 'client' },
+    // { label: 'Client', key: 'client' },
     { label: 'Réalisateur', key: 'director' },
     { label: 'Catégories', key: 'tags' },
     { label: 'Statut/Date', key: 'publishedDate' }

@@ -1,15 +1,15 @@
 <script lang="ts">
   import Content from '$lib/components/Content.svelte'
   import Table from '$lib/components/Table.svelte'
-
-  import { page } from '$app/stores'
-
-  import type { PageData } from './$types'
   import Media from '$lib/components/Media.svelte'
   import Video from '$lib/components/Video.svelte'
   import Document from '$lib/components/document/index.svelte'
-  export let data: PageData
 
+  import { page } from '$app/stores'
+  import { pushState } from '$app/navigation'
+
+  import type { PageData } from './$types'
+  export let data: PageData
 </script>
 
 
@@ -17,7 +17,15 @@
 <Video srcs={data.film.fields.video} grabs={data.film.fields.screenGrabs}>
 	<nav slot="title">
 		<h6>{data.film.fields.title}</h6>
-    {#if data.film.fields.director}<h6><a href="/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a></h6>{/if}
+    <h6></h6>
+    {#if data.film.fields.director}<h6>
+      <a on:click={(e) => {
+        const { href } = e.currentTarget
+        pushState(href, {})
+      }} href="/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
+    </h6>{/if}
+    <h6></h6>
+    <h6></h6>
 	</nav>
 </Video>
 
@@ -153,10 +161,16 @@
 
   nav {
     display: flex;
-    // justify-content: space-between;
+    justify-content: space-between;
+    padding: $base 0;
 
     h6 {
       flex: 1;
+      padding: 0 $base;
+
+      &:nth-child(2) {
+        // text-align: center;
+      }
     }
   }
 </style>

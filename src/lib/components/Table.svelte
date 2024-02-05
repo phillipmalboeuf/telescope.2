@@ -2,7 +2,7 @@
   import type { EntryCollection } from 'contentful'
   import type { TypeFilmSkeleton } from '$lib/clients/content_types'
   import { api } from '$lib/api';
-  import { date } from '$lib/formatters'
+  import { date, year } from '$lib/formatters'
   import { goto, preloadData, pushState } from '$app/navigation'
 
   import { page } from '$app/stores'
@@ -77,7 +77,7 @@
         {#if column.key === 'tags' && film.fields.tags}
         {film.fields.tags.filter(tag => !out.includes(tag)).join(' ')}
         {:else if column.key.includes('Date')}
-        {film.fields[column.key] ? date(film.fields[column.key]) : '–'}
+        {film.fields[column.key] ? year(film.fields[column.key]) : '–'}
         {:else}
         {#if i === 0}
         <a
@@ -142,6 +142,7 @@
 
         button {
           background-color: $grey-light;
+          text-transform: capitalize;
 
           &.active {
             color: $white;
@@ -177,6 +178,7 @@
 
       td {
         padding: ($base * 0.25) 0;
+        text-transform: capitalize;
       }
 
       tr:not(:has(> th)):hover,

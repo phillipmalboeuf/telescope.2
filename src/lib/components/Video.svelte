@@ -184,7 +184,7 @@
     left: 0;
     width: 100%;
     z-index: 2;
-    padding: $base;
+    // padding: $base;
     // text-align: center;
   }
 
@@ -202,7 +202,7 @@
   figcaption.controls {
     position: absolute;
     left: 0;
-    bottom: $base * 0.5;
+    bottom: $base;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -220,7 +220,7 @@
 
     label[for="time"] {
       position: absolute;
-      bottom: $gap * 2.5;
+      bottom: $gap * 3;
       font-size: var(--tiny);
       transform: translateX(-50%);
     }
@@ -231,7 +231,7 @@
 
     input[type="range"] {
       position: absolute;
-      bottom: $gap * 2;
+      bottom: $gap * 2.5;
       left: 0;
       width: 100%;
       margin: 0;
