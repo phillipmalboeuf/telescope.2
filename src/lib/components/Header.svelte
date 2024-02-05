@@ -112,6 +112,8 @@
     top: 0;
     left: 0;
     width: 100vw;
+    max-height: 100vh;
+    overflow-y: auto;
     padding: $base 0;
     background-color: fade-out($white, 1);
     transition: height 666ms, background-color 666ms, -webkit-backdrop-filter 666ms, backdrop-filter 666ms;
