@@ -15,7 +15,7 @@
 	let paused: boolean = true
   let resolution = 0
   let showResolutions = false
-  let volume = 0
+  let volume = 1
   let fullscreen = false
   let inactive = false
 
