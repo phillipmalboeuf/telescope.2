@@ -35,18 +35,22 @@
     <h4>Film</h4>
     <Document body={data.film.fields.description} />
   </div>
-  {#if data.film.fields.distribution}
+  
   <div>
+    {#if data.film.fields.distribution}
     <h4>Distributions</h4>
     <Document body={data.film.fields.distribution} />
+    {/if}
   </div>
-  {/if}
-  {#if data.film.fields.synopsis}
+  
+  
   <div>
+    {#if data.film.fields.synopsis}
     <h4>Synopsis</h4>
     <Document body={data.film.fields.synopsis} />
+    {/if}
   </div>
-  {/if}
+  
   {#if data.film.fields.prix}
   <div>
     <h4>Prix et distinctions</h4>
@@ -103,6 +107,9 @@
     > div {
       flex: 1;
       padding-right: $base;
+      display: flex;
+      flex-direction: column;
+      gap: $base;
 
       :global(html:has(.films)) & {
         border-color: $grey;
