@@ -4,16 +4,20 @@
 
   import FilmPage from '../../routes/[[locale]]/films/[id]/+page.svelte'
   import ContactPage from '../../routes/[[locale]]/contact/+page.svelte'
+  import Page from '../../routes/[[locale]]/pages/[id]/+page.svelte'
 </script>
 
 {#if $page.state.open}
 <dialog transition:fly={{ opacity: 1, y: {
-  'contact': '-100%'
+  'contact': '-100%',
+  'page': '-100%'
 }[$page.state.type] || '100%', duration: 666 }}>
   {#if $page.state.type === 'film'}
   <FilmPage data={$page.state.open} />
   {:else if $page.state.type === 'contact'}
   <ContactPage data={$page.state.open} />
+  {:else if $page.state.type === 'page'}
+  <Page data={$page.state.open} />
   {/if}
 
   <button on:click={() => history.back()}>Fermer</button>

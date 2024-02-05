@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { isTypeFilm, type TypeAboutPieceSkeleton, type TypeArticleSkeleton, type TypeCollaboratorSkeleton, type TypeCollaboratorSliderSkeleton, type TypeContactPersonSkeleton, type TypeContactPointSkeleton, type TypeFilmSkeleton, type TypeLooseTextSkeleton } from '$lib/clients/content_types'
+  import { isTypeFilm, isTypeLooseText, type TypeAboutPieceSkeleton, type TypeArticleSkeleton, type TypeCollaboratorSkeleton, type TypeCollaboratorSliderSkeleton, type TypeContactPersonSkeleton, type TypeContactPointSkeleton, type TypeFilmSkeleton, type TypeLooseTextSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
+  
   import ListFilm from './ListFilm.svelte'
+  import Document from './document/index.svelte'
 
   export let query: string = undefined
   export let content: Entry<TypeAboutPieceSkeleton | TypeArticleSkeleton | TypeCollaboratorSkeleton | TypeCollaboratorSliderSkeleton | TypeContactPersonSkeleton | TypeContactPointSkeleton | TypeFilmSkeleton | TypeLooseTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">[]
@@ -12,6 +14,10 @@
   {#if isTypeFilm(item)}
   <li class:full={item.fields.full} style="--index: {i}; --index-reverse: {content.length - i}">
     <ListFilm {i} film={item} full={item.fields.full} />
+  </li>
+  {:else if isTypeLooseText(item)}
+  <li class="wide">
+    <Document body={item.fields.body} />
   </li>
   {/if}
 {/each}
@@ -29,6 +35,20 @@
 
       @media (max-width: $mobile) {
         width: 100%;
+      }
+
+      &.wide {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: $base;
+
+        > :global(*) {
+          max-width: $max;
+        }
       }
     }
   }

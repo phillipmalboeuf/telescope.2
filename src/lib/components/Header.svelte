@@ -13,7 +13,6 @@
   export let header: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 
   let visible = false
-  let about: Entry<TypeLooseTextSkeleton, "WITHOUT_UNRESOLVABLE_LINKS"> = undefined
 
   let films = false
   let directors = false
@@ -31,7 +30,7 @@
           films = false
           directors = false
 
-          if (link.fields.link !== '/contact') return;
+          if (link.fields.link !== '/contact' && link.fields.link !== '/pages/about') return;
           if (e.metaKey) return;
 
           e.preventDefault()
@@ -39,13 +38,13 @@
           const result = await preloadData(href)
 
           if (result.type === 'loaded' && result.status === 200) {
-            pushState(href, { type: 'contact', open: result.data })
+            pushState(href, { type: link.fields.link.includes('pages') ? 'page' : 'contact', open: result.data })
           } else {
             goto(href)
           }
         }}
         on:touchstart={(e) => {
-          if (["/films", "/directors", "/about"].includes(link.fields.link)) {
+          if (["/films", "/directors"].includes(link.fields.link)) {
             e.preventDefault()
             e.stopImmediatePropagation()
           }
@@ -53,26 +52,16 @@
           if (link.fields.link === "/films") {
             films = true
             directors = false
-            about = undefined
           }
 
           if (link.fields.link === "/directors") {
             directors = true
             films = false
-            about = undefined
           }
         }}
         on:pointerenter={async () => {
           visible = true
-
-          if (link.fields.link === "/about") {
-            directors = false
-            films = false
-            // @ts-ignore
-            about = await api.get("/about")
-          }
-        }}
-        on:pointerleave={() => about = undefined}><span use:collides>{link.fields.label}</span></a>
+        }}><span use:collides>{link.fields.label}</span></a>
 
       {#if $page.data.films && link.fields.link === "/films"}
       <ol class:films>
@@ -88,10 +77,6 @@
         <li><a href="/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
         {/each}
       </ol>
-      {/if}
-
-      {#if about && link.fields.link === "/about"}
-      <aside class:about><Document body={about.fields.body} /></aside>
       {/if}
     </div>
    

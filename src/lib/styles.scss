@@ -28,7 +28,8 @@ html {
 		--background-inverse: #{$white};
 	}
 
-	&:has(.contact) {
+	&:has(.contact),
+	&:has(.pages) {
 		--foreground: #{$white};
 		--background: #{$black-light};
 		--foreground-inverse: #{$black-light};

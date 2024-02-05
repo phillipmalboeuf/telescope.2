@@ -6,6 +6,11 @@
   export let data: PageData
 </script>
 
+<svelte:head>
+	<title>{data.page.fields.title}</title>
+	<meta name="description" content={data.page.fields.description} />
+</svelte:head>
+
 <main>
   <nav>
     <a href="/" class="inactive" on:click={async (e) => {

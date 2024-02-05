@@ -6,7 +6,10 @@
   export let data: PageData
 </script>
 
-<!-- <h1>{data.page.fields.title}</h1> -->
+<svelte:head>
+	<title>{data.page.fields.title}</title>
+	<meta name="description" content={data.page.fields.description} />
+</svelte:head>
 
 <Content content={data.page.fields.content} />
 
