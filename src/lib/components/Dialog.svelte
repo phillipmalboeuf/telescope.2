@@ -36,7 +36,7 @@
     background-color: var(--background);
 
     > button {
-      position: absolute;
+      position: fixed;
       top: $base * 0.83333333;
       right: $base;
       z-index: 2001;
