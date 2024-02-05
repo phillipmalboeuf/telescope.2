@@ -16,5 +16,5 @@
     { label: 'Client', key: 'client' },
     { label: 'Réalisateur', key: 'ralisateur' },
     { label: 'Catégories', key: 'tags' },
-    { label: 'Statut/Date', key: 'publishedDate' }
+    { label: 'Année', key: 'publishedDate' }
   ]} />
