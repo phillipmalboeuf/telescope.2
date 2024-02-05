@@ -118,7 +118,7 @@
     pointer-events: none;
 
     &:not(.visible) {
-      .collides {
+      :global(.collides) {
         color: $white !important;
       }
       // @supports (mix-blend-mode: exclusion) {
