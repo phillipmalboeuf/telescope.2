@@ -9,6 +9,7 @@
   import { pushState } from '$app/navigation'
 
   import type { PageData } from './$types'
+  import { year } from '$lib/formatters';
   export let data: PageData
 </script>
 
@@ -25,7 +26,7 @@
       }} href="/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
     </h6>{/if}
     <h6></h6>
-    <h6></h6>
+    <h6>{#if data.film.fields.publishedDate}{year(data.film.fields.publishedDate)}{/if}</h6>
 	</nav>
 </Video>
 

@@ -54,7 +54,7 @@
     {:else}
     <Picture media={item.fields.poster} />
     {/if} -->
-    <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small />
+    <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {#if film.fields.popup && popup}
     <figcaption class="popup" transition:fly={{ y: '100%', duration: 333 }}>
       <div>
@@ -101,6 +101,7 @@
     display: block;
     position: relative;
     height: 50vh;
+    background-color: $black;
 
     :global(img),
     :global(video) {
