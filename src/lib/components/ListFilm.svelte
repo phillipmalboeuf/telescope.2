@@ -113,17 +113,26 @@
 
     @media (min-width: $mobile) {
       filter: blur(0.0001px);
+    }
 
-      &:not(.full):before {
+    &:not(.full) {
+      @media (max-width: $mobile) {
+        margin-bottom: 50vh;
+      }
+
+      &:after {
         content: "";
         pointer-events: none;
         display: block;
-        position: absolute;
-        bottom: 100%;
-        left: 0;
         height: 50vh;
         width: 100%;
         background-color: var(--background);
+
+        @media (min-width: $mobile) {
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+        }
       }
     }
 
