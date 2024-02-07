@@ -49,9 +49,10 @@
 <a on:click={go}
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
   <figure bind:this={element} class:full class:wide>
-    <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
     <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video />
+    {:else}
+    <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {/if}
 
     {#if film.fields.popup && popup}
@@ -97,12 +98,12 @@
 
 <style lang="scss">
   a {
-    &:hover,
-    &:focus {
-      :global(video) {
-        opacity: 1;
-      }
-    }
+    // &:hover,
+    // &:focus {
+    //   :global(video) {
+    //     opacity: 1;
+    //   }
+    // }
   }
   figure {
     display: block;
@@ -116,18 +117,19 @@
       object-fit: cover;
       position: relative;
       z-index: var(--index);
+      background-color: $black;
     }
 
     :global(video) {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: var(--index);
-      opacity: 0;
-      transition: opacity 333ms;
-      will-change: opacity;
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+      // width: 100%;
+      // height: 100%;
+      // z-index: var(--index);
+      // opacity: 0;
+      // transition: opacity 333ms;
+      // will-change: opacity;
     }
 
     @media (min-width: $mobile) {

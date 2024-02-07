@@ -138,7 +138,6 @@ button:focus:not(:focus-visible) {
 
 button,
 .button {
-	color: currentColor;
 	cursor: pointer;
 	display: inline-block;
 	padding: ($base * $scale * 0.125) ($base * $scale * 0.333);
@@ -147,6 +146,7 @@ button,
 	// border: 1px solid;
 	line-height: 1;
 	border: 1px solid transparent;
+	color: $black;
 	background-color: $grey-light;
 }
 
