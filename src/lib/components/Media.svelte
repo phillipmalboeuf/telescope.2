@@ -37,7 +37,7 @@
 {#if typeof media !== 'string'}
 {#if media.fields.file.contentType.startsWith('video/')}
 <!-- svelte-ignore a11y-media-has-caption -->
-<video src="{cdn(media.fields.file.url)}" controls bind:this={video} autoplay={eager} muted={eager} loop={eager} />
+<video src="{cdn(media.fields.file.url)}" controls={false} playsinline bind:this={video} autoplay={eager} muted={eager} loop={eager} />
 {:else if media.fields.file.contentType.startsWith('audio/')}
 <!-- {#if !noDescription && media}
 <small>{media}</small>

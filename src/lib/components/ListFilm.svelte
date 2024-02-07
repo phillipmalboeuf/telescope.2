@@ -21,6 +21,7 @@
 
   let popup = false
   let element: HTMLElement
+  let video: HTMLVideoElement
 
   const go: MouseEventHandler<HTMLAnchorElement> = async (e) => {
     if (e.metaKey) return;
@@ -48,13 +49,11 @@
 <a on:click={go}
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
   <figure bind:this={element} class:full class:wide>
-    <!-- {#if !$page.data.isMobile && item.fields.teaser}
-    <ListVideo src={item.fields.animationList || item.fields.teaser}
-      poster={item.fields.poster && `${item.fields.poster.fields.file.url}?w=900`} />
-    {:else}
-    <Picture media={item.fields.poster} />
-    {/if} -->
     <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
+    {#if film.fields.animationList || film.fields.teaser}
+    <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video />
+    {/if}
+    
     {#if film.fields.popup && popup}
     <figcaption class="popup" transition:fly={{ y: '100%', duration: 333 }}>
       <div>
@@ -97,6 +96,14 @@
 </a>
 
 <style lang="scss">
+  a {
+    &:hover,
+    &:focus {
+      :global(video) {
+        opacity: 1;
+      }
+    }
+  }
   figure {
     display: block;
     position: relative;
@@ -109,6 +116,18 @@
       object-fit: cover;
       position: relative;
       z-index: var(--index);
+    }
+
+    :global(video) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: var(--index);
+      opacity: 0;
+      transition: opacity 333ms;
+      will-change: opacity;
     }
 
     @media (min-width: $mobile) {
