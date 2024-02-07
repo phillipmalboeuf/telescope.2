@@ -50,10 +50,10 @@
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
   <figure bind:this={element} class:full class:wide>
     <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
-    {#if film.fields.animationList || film.fields.teaser}
+    {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
     <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video />
     {/if}
-    
+
     {#if film.fields.popup && popup}
     <figcaption class="popup" transition:fly={{ y: '100%', duration: 333 }}>
       <div>
