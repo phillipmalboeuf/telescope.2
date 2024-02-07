@@ -4,7 +4,6 @@ import UAParser from 'ua-parser-js'
 
 export const load = async ({ locals, params, url, request }) => {
   let parser: UAParser = request.headers.has('User-Agent') && new UAParser(request.headers.get('User-Agent'))
-  console.log(parser.getResult())
 
   const [header, footer, tags, popups, films, directors] = await Promise.all([
     content.getEntries<TypeNavigationSkeleton>({ content_type: 'navigation', select: ['sys.id', 'fields.identifier', 'fields.links'], include: 2, "fields.identifier": "header", locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
