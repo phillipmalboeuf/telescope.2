@@ -13,7 +13,7 @@
 
 <main>
   <nav>
-    <a href="/" class="inactive" on:click={async (e) => {
+    <a href="{$page.data.locale === 'fr' ? '/' : `/${$page.data.locale}`}" class="inactive" on:click={async (e) => {
       if (!$page.state.open) return;
       if (e.metaKey) return;
 

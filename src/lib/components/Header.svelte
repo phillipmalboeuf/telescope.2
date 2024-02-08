@@ -23,7 +23,7 @@
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
     <div>
-      <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}
+      <a href="{(link.fields.external || $page.data.locale === 'fr') ? '' : `/${$page.data.locale}`}{link.fields.link}" {...link.fields.external && { rel: "external", target: "_blank" }}
         class:active={$page.url.pathname !== '/' && link.fields.link !== '/' && $page.url.pathname.startsWith(link.fields.link)}
         on:click={async (e) => {
           visible = false
@@ -66,7 +66,7 @@
       {#if $page.data.films && link.fields.link === "/films"}
       <ol class:films>
         {#each $page.data.films as film}
-        <li><a href="/films/{film.fields.identifier}">{film.fields.title}</a></li>
+        <li><a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films/{film.fields.identifier}">{film.fields.title}</a></li>
         {/each}
       </ol>
       {/if}
@@ -74,19 +74,25 @@
       {#if $page.data.directors && link.fields.link === "/directors"}
       <ol class:directors>
         {#each $page.data.directors as director}
-        <li><a href="/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
+        <li><a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
         {/each}
       </ol>
       {/if}
     </div>
    
     {/each}
-    <small><a href="/en">English</a></small>
+    <small>
+      {#if $page.data.locale === 'fr'}
+      <a href="/en"><small>English</small></a>
+      {:else}
+      <a href="/"><small>Français</small></a>
+      {/if}
+    </small>
     <div><button on:click={()=> {
       visible = !visible
       films = false
       directors = false
-    }}>{#if visible}Fermer{:else}Menu{/if}</button></div>
+    }}>{#if visible}{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}{:else}Menu{/if}</button></div>
   </nav>
 </header>
 
@@ -262,6 +268,16 @@
 
       :global(html:has(.films)) & {
         background-color: fade-out($black-light, 0.5);
+      }
+
+      @media (min-width: $mobile) {
+        small {
+          font-size: $base;
+          display: block;
+          position: absolute;
+          bottom: $base * 0.5;
+          right: 0;
+        }
       }
 
       @media (max-width: $mobile) {

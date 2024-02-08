@@ -20,7 +20,7 @@
   <Page data={$page.state.open} />
   {/if}
 
-  <button on:click={() => history.back()}>Fermer</button>
+  <button on:click={() => history.back()}>{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</button>
 </dialog>
 {/if}
 

@@ -73,7 +73,7 @@
 
       <button on:click|stopPropagation|preventDefault={() => {
         popup = false
-      }}>Fermer</button>
+      }}>{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</button>
     </figcaption>
     {:else}
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
@@ -81,14 +81,14 @@
       <aside>
         <button on:click|stopPropagation|preventDefault={() => {
           popup = true
-        }}>Voir la distinction ↗</button>
+        }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} ↗</button>
       </aside>
       {/if}
       <h6>{film.fields.title}</h6>
       <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
       <h6>{#if film.fields.status}<span class={film.fields.status}>{@html `${{
-        'Distribution': 'En&nbsp;distribution',
-        'Production': 'En&nbsp;production'
+        'Distribution': $page.data.locale === 'fr' ? 'En&nbsp;distribution' : 'In&nbsp;distribution',
+        'Production': $page.data.locale === 'fr' ? 'En&nbsp;production' : 'In&nbsp;production'
       }[film.fields.status]}`}</span>{:else if film.fields.publishedDate}{year(film.fields.publishedDate)}{/if}</h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>

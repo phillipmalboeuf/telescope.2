@@ -23,7 +23,7 @@
       <a on:click={(e) => {
         const { href } = e.currentTarget
         pushState(href, {})
-      }} href="/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
+      }} href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
     </h6>{/if}
     <h6></h6>
     <h6>{#if data.film.fields.publishedDate}{year(data.film.fields.publishedDate)}{/if}</h6>
