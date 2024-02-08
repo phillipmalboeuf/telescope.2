@@ -6,6 +6,7 @@
   import { pushState } from '$app/navigation'
 
   import type { PageData } from './$types'
+  import Logo from '$lib/components/Logo.svelte';
   export let data: PageData
 </script>
 
@@ -15,21 +16,54 @@
 </svelte:head>
 
 <main>
-  <Content content={data.page.fields.content} />
+  <section>
+    <h1 class="h6">{data.page.fields.title}</h1>
+    <Content content={data.page.fields.content} />
+    <div></div>
+  </section>
+  <figure>
+    <Logo />
+  </figure>
 </main>
 
 
 <style lang="scss">
   main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     min-height: 100vh;
     padding: $base;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: $gap;
 
     color: $white;
 		background-color: $black-light;
+
+    h1 {
+      text-align: left;
+    }
+
+    figure {
+      width: 100%;
+
+      :global(svg) {
+        width: 100%;
+      }
+    }
+
+    section {
+      width: 50%;
+      min-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: $gap;
+      border-left: 1px solid $grey;
+      padding-left: $base;
+      padding-right: $gap * 2;
+
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
+    }
   }
 </style>
