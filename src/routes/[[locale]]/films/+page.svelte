@@ -18,6 +18,6 @@
     { label: 'Projet', key: 'title' },
     // { label: 'Client', key: 'client' },
     { label: 'Réalisateur', key: 'director' },
-    { label: 'Catégories', key: 'tags' },
+    { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }
   ]} />
