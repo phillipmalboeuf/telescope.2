@@ -7,7 +7,7 @@ import type { Entry } from 'contentful'
 export const load = (async ({ locals, url, params }) => {
   const [director, films] = await Promise.all([
     content.getEntries<TypeCollaboratorSkeleton>({ content_type: "collaborator", include: 2, "fields.tagIdentifier": params.id, locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
-    content.getEntries<TypeFilmSkeleton>({ content_type: "film", include: 1, order: ["-fields.publishedDate"], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA',
+    content.getEntries<TypeFilmSkeleton>({ content_type: "film", include: 1, limit: 6, order: ["-fields.publishedDate"], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA',
       'fields.director.fields.tagIdentifier': params.id,
       'fields.director.sys.contentType.sys.id': 'collaborator'
     })
