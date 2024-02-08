@@ -170,7 +170,7 @@
       position: -webkit-sticky;
       position: sticky;
       z-index: var(--index);
-      bottom: 0;
+      bottom: 40%;
       color: var(--foreground-inverse);
       padding: $base 0;
 
