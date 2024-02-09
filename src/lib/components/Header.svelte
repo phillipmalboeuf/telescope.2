@@ -118,7 +118,7 @@
 
   {#if visibleMedia}
   <figure transition:fade={{ duration: 333 }} style="top: {visiblePosition.top}px; left: {visiblePosition.left}px;">
-    <Media media={visibleMedia.media} poster={visibleMedia.poster} small />
+    <Media media={visibleMedia.media} poster={visibleMedia.poster} small eager />
   </figure>
   {/if}
 </header>
@@ -391,6 +391,8 @@
       transform: translate(-50%, -33%);
 
       :global(video) {
+        display: block;
+        width: 100%;
         height: 100%;
         object-fit: cover;
       }
