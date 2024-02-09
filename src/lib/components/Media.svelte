@@ -7,6 +7,7 @@
   export let ar: number = undefined
   export let eager = false
   export let video: HTMLVideoElement = undefined
+  export let poster: Asset<"WITHOUT_UNRESOLVABLE_LINKS"> = undefined
 
   function cdn(url: string) {
     // return url.replace('https://images.ctfassets.net/vgc87z7vc7p3', 'https://quebecsolidaire-images.imgix.net')
@@ -37,7 +38,7 @@
 {#if typeof media !== 'string'}
 {#if media.fields.file.contentType.startsWith('video/')}
 <!-- svelte-ignore a11y-media-has-caption -->
-<video src="{cdn(media.fields.file.url)}" controls={false} playsinline bind:this={video} autoplay={eager} muted={eager} loop={eager} />
+<video src="{cdn(media.fields.file.url)}" controls={false} playsinline bind:this={video} autoplay={eager} muted={eager} loop={eager} poster={poster && `${cdn(poster.fields.file.url)}?w=600`} />
 {:else if media.fields.file.contentType.startsWith('audio/')}
 <!-- {#if !noDescription && media}
 <small>{media}</small>
@@ -51,13 +52,13 @@
   <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(400 * ar)}` : ''}" media="(max-width: 900px)" />
   <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(600 * ar)}` : ''}" media="(max-width: 1200px)" />
   <img src="{cdn(media.fields.file.url)}?w=800{ar ? `&fit=crop&h=${Math.round(800 * ar)}` : ''}"
-    style={ar ? `aspect-ratio: 800 / ${Math.round(ar * 800) + 2}` : ''}
+    style={`aspect-ratio: ${ar ? `800 / ${Math.round(ar * 800) + 2}` : `${media.fields.file.details.image.width} / ${media.fields.file.details.image.height}`}`}
     alt="{media.fields.title}" loading={eager ? "eager" : "lazy"} />
   {:else}
   <source srcSet="{cdn(media.fields.file.url)}?w=900{ar ? `&fit=crop&h=${Math.round(900 * ar)}` : ''}" media="(max-width: 900px)" />
   <source srcSet="{cdn(media.fields.file.url)}?w=1200{ar ? `&fit=crop&h=${Math.round(1200 * ar)}` : ''}" media="(max-width: 1200px)" />
   <img src="{cdn(media.fields.file.url)}?w=1800{ar ? `&fit=crop&h=${Math.round(1800 * ar)}` : ''}"
-    style={ar ? `aspect-ratio: 1800 / ${Math.round(ar * 1800) + 2}` : ''}
+    style={`aspect-ratio: ${ar ? `1800 / ${Math.round(ar * 1800) + 2}` : `${media.fields.file.details.image.width} / ${media.fields.file.details.image.height}`}`}
     alt="{media.fields.title}" loading={eager ? "eager" : "lazy"} />
   {/if}
 </picture>

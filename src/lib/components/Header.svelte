@@ -1,14 +1,14 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import Document from '$lib/components/document/index.svelte'
   import { fade, fly } from 'svelte/transition'
   import { goto, preloadData, pushState } from '$app/navigation'
 
-  import type { TypeLooseTextSkeleton, TypeNavigationSkeleton } from '$lib/clients/content_types'
-  import type { Entry } from 'contentful'
+  import type { TypeFilmSkeleton, TypeLooseTextSkeleton, TypeNavigationSkeleton } from '$lib/clients/content_types'
+  import type { Asset, Entry } from 'contentful'
   
   import { api } from '$lib/api'
   import { collides } from '$lib/collides'
+  import Media from './Media.svelte'
   
   export let header: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 
@@ -16,10 +16,22 @@
 
   let films = false
   let directors = false
+
+  let visibleMedia: {
+    media: Asset<"WITHOUT_UNRESOLVABLE_LINKS">
+    poster: Asset<"WITHOUT_UNRESOLVABLE_LINKS">
+  }
+  let visiblePosition: {
+    top: number
+    left: number
+  }
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<header class:visible on:mouseleave={() => visible = false}>
+<header class:visible on:mouseleave={() => visible = false} on:mousemove={(e) => visiblePosition = {
+  top: e.screenY,
+  left: e.screenX
+}}>
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
     <div>
@@ -66,7 +78,13 @@
       {#if $page.data.films && link.fields.link === "/films"}
       <ol class:films>
         {#each $page.data.films as film}
-        <li><a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films/{film.fields.identifier}">{film.fields.title}</a></li>
+        <li><a
+          on:mouseenter={() => visibleMedia = {
+            media: film.fields.animationList || film.fields.teaser,
+            poster: film.fields.poster
+          }}
+          on:mouseleave={() => visibleMedia = undefined}
+          href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films/{film.fields.identifier}">{film.fields.title}</a></li>
         {/each}
       </ol>
       {/if}
@@ -74,7 +92,10 @@
       {#if $page.data.directors && link.fields.link === "/directors"}
       <ol class:directors>
         {#each $page.data.directors as director}
-        <li><a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
+        <li><a
+          on:mouseenter={() => visibleMedia = undefined}
+          on:mouseleave={() => visibleMedia = undefined}
+          href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
         {/each}
       </ol>
       {/if}
@@ -94,6 +115,12 @@
       directors = false
     }}>{#if visible}{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}{:else}Menu{/if}</button></div>
   </nav>
+
+  {#if visibleMedia}
+  <figure transition:fade={{ duration: 333 }} style="top: {visiblePosition.top}px; left: {visiblePosition.left}px;">
+    <Media media={visibleMedia.media} poster={visibleMedia.poster} small />
+  </figure>
+  {/if}
 </header>
 
 <style lang="scss">
@@ -350,6 +377,22 @@
         &:nth-child(n + 4) a {
           visibility: visible;
         }
+      }
+    }
+
+    figure {
+      position: absolute;
+      width: 20vw;
+      height: 12.5vw;
+      background-color: $black;
+
+      overflow: hidden;
+      border-radius: $base * 0.5;
+      transform: translate(-50%, -33%);
+
+      :global(video) {
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

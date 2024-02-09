@@ -50,7 +50,7 @@
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
   <figure bind:this={element} class:full class:wide>
     {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
-    <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video />
+    <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video poster={film.fields.poster} />
     {:else}
     <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {/if}
