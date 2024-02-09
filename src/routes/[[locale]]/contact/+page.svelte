@@ -112,7 +112,7 @@
           margin-bottom: $gap;
 
           h5, h6 {
-            font-size: $base * 0.75;
+            font-size: $base * 0.88;
             font-weight: normal;
             line-height: 1.333;
           }
