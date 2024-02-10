@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EntryCollection } from 'contentful'
+  import type { Entry, EntryCollection } from 'contentful'
   import type { TypeFilmSkeleton } from '$lib/clients/content_types'
   import { api } from '$lib/api';
   import { date, year } from '$lib/formatters'
@@ -24,8 +24,13 @@
   let data: EntryCollection<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS"> = undefined
   let filter: string = undefined
   let tags: string[] = undefined
+  let items: Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">[]
+  let more = false
+  const moreLimit = 12
   
   const out = ["recent","martin-c-pariseau","vincent-lortie","brittney-canda","jf-sauve","kristof-brandl","phil-chagnon","jb-proulx", "2017","2018","2019","2020","2021","2022"]
+
+  $: { items = data?.items.filter(film => filter ? film.fields.tags?.map(tag => tag.toLowerCase()).includes(filter) : true) }
 </script>
 
 <section>
@@ -70,7 +75,7 @@
       <th colspan={columns.length}><hr></th>
     </tr>
 
-    {#each data.items.filter(film => filter ? film.fields.tags?.map(tag => tag.toLowerCase()).includes(filter) : true) as film, i}
+    {#each items.filter((_, i) => more || i < moreLimit) as film, i}
     <tr>
       {#each columns as column, i}
       <td>
@@ -103,6 +108,11 @@
       {/each}
     </tr>
     {/each}
+    {/if}
+    {#if !more && items && items.length > moreLimit}
+    <tr>
+      <td colspan={columns.length}><button on:click={() => more = true}>{$page.data.locale === 'fr' ? 'En voir plus' : 'See more'}</button></td>
+    </tr>
     {/if}
   </table>
   {/if}
