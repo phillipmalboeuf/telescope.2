@@ -13,7 +13,7 @@
   'page': '-100%'
 }[$page.state.type] || '100%', duration: 666 }}>
   {#if $page.state.type === 'film'}
-  <FilmPage data={$page.state.open} />
+  <FilmPage data={$page.state.open} close />
   {:else if $page.state.type === 'contact'}
   <ContactPage data={$page.state.open} />
   {:else if $page.state.type === 'page'}

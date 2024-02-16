@@ -9,8 +9,10 @@
   import { pushState } from '$app/navigation'
 
   import type { PageData } from './$types'
-  import { year } from '$lib/formatters';
+  import { year } from '$lib/formatters'
   export let data: PageData
+
+  export let close = false
 </script>
 
 
@@ -27,6 +29,8 @@
     </h6>{/if}
     <h6></h6>
     <h6>{#if data.film.fields.publishedDate}{year(data.film.fields.publishedDate)}{/if}</h6>
+
+    {#if !close}<a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films" class="button">{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</a>{/if}
 	</nav>
 </Video>
 
@@ -170,15 +174,21 @@
   nav {
     display: flex;
     justify-content: space-between;
-    padding: $base 0;
+    padding: ($base * 0.75) 0;
 
     h6 {
       flex: 1;
-      padding: 0 $base;
+      padding: 0 ($base * 0.75);
 
       &:nth-child(2) {
         // text-align: center;
       }
+    }
+
+    > a {
+      position: absolute;
+      top: ($base * 0.75);
+      right: ($base * 0.75);
     }
   }
 </style>
