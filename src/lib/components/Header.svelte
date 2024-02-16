@@ -79,6 +79,7 @@
       <ol class:films>
         {#each $page.data.films as film}
         <li><a
+          on:click={() => visible = false}
           on:mouseenter={() => visibleMedia = {
             media: film.fields.animationList || film.fields.teaser,
             poster: film.fields.poster
@@ -93,6 +94,7 @@
       <ol class:directors>
         {#each $page.data.directors as director}
         <li><a
+          on:click={() => visible = false}
           on:mouseenter={() => visibleMedia = undefined}
           on:mouseleave={() => visibleMedia = undefined}
           href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
