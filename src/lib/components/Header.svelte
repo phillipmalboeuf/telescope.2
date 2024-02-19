@@ -29,8 +29,8 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <header class:visible on:mouseleave={() => visible = false} on:mousemove={(e) => visiblePosition = {
-  top: e.screenY,
-  left: e.screenX
+  top: e.clientY,
+  left: e.clientX
 }}>
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
@@ -390,7 +390,7 @@
 
       overflow: hidden;
       border-radius: $base * 0.5;
-      transform: translate(-50%, -33%);
+      transform: translate(-50%, 15%);
 
       :global(video) {
         display: block;
