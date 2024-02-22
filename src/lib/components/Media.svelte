@@ -6,6 +6,7 @@
   // export let noDescription = false
   export let ar: number = undefined
   export let eager = false
+  export let background = false
   export let video: HTMLVideoElement = undefined
   export let poster: Asset<"WITHOUT_UNRESOLVABLE_LINKS"> = undefined
 
@@ -38,7 +39,7 @@
 {#if typeof media !== 'string'}
 {#if media.fields.file.contentType.startsWith('video/')}
 <!-- svelte-ignore a11y-media-has-caption -->
-<video src="{cdn(media.fields.file.url)}" controls={false} playsinline bind:this={video} autoplay={eager} muted={eager} loop={eager} poster={poster && `${cdn(poster.fields.file.url)}?w=600`} />
+<video src="{cdn(media.fields.file.url)}" controls={false} playsinline bind:this={video} autoplay={eager} muted={background} loop={background} poster={poster && `${cdn(poster.fields.file.url)}?w=600`} />
 {:else if media.fields.file.contentType.startsWith('audio/')}
 <!-- {#if !noDescription && media}
 <small>{media}</small>

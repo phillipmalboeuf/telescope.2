@@ -48,9 +48,10 @@
 
 <a on:click={go}
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
-  <figure bind:this={element} class:full class:wide>
+  <figure bind:this={element} class:full class:wide on:mouseenter={() => video.play()} on:mouseleave={() => video.pause()}>
     {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
-    <Media media={film.fields.animationList || film.fields.teaser} eager small={!wide} bind:video poster={film.fields.poster} />
+    <!-- <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video poster={film.fields.poster} background /> -->
+    <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video background />
     {:else}
     <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {/if}
@@ -77,13 +78,6 @@
     </figcaption>
     {:else}
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
-      {#if film.fields.popup}
-      <aside>
-        <button on:click|stopPropagation|preventDefault={() => {
-          popup = true
-        }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} ↗</button>
-      </aside>
-      {/if}
       <h6>{film.fields.title}</h6>
       <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
       <h6>{#if film.fields.status}<span class={film.fields.status}>{@html `${{
@@ -92,6 +86,14 @@
       }[film.fields.status]}`}</span>{:else if film.fields.publishedDate}{year(film.fields.publishedDate)}{/if}</h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
+    {/if}
+
+    {#if film.fields.popup && !popup}
+    <aside transition:fly={{ y: '100%', duration: 333 }}>
+      <button on:click|stopPropagation|preventDefault={() => {
+        popup = true
+      }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} ↗</button>
+    </aside>
     {/if}
   </figure>
 </a>
@@ -165,6 +167,27 @@
         height: 100vh;
       }
     }
+    
+    aside {
+      position: absolute;
+      z-index: 3;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: $base;
+
+      @media (max-width: $mobile) {
+        order: -1;
+      }
+
+      button {
+        padding: ($base * $scale * 0.25) ($base * $scale * 0.5);
+        color: var(--foreground-inverse);
+        background-color: fade-out($white, 0.5);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+      }
+    }
 
     figcaption {
       position: -webkit-sticky;
@@ -186,23 +209,6 @@
         position: absolute;
         width: 100%;
         padding: $mobile_base 0;
-      }
-
-      aside {
-        width: 100%;
-        padding: $base;
-
-        @media (max-width: $mobile) {
-          order: -1;
-        }
-
-        button {
-          padding: ($base * $scale * 0.25) ($base * $scale * 0.5);
-          color: var(--foreground-inverse);
-          background-color: fade-out($white, 0.5);
-          -webkit-backdrop-filter: blur(20px);
-          backdrop-filter: blur(20px);
-        }
       }
 
       h6 {
@@ -252,6 +258,7 @@
 
       &.popup {
         position: absolute;
+        bottom: 0;
         padding: $base;
         // background-color: fade-out($white, 0.75);
         -webkit-backdrop-filter: blur(20px);
