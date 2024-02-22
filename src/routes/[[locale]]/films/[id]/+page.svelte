@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { onDestroy, onMount } from 'svelte'
+  import { fade, fly } from 'svelte/transition'
+
   import Content from '$lib/components/Content.svelte'
   import Table from '$lib/components/Table.svelte'
   import Media from '$lib/components/Media.svelte'
@@ -10,12 +13,17 @@
 
   import type { PageData } from './$types'
   import { year } from '$lib/formatters'
+  
   export let data: PageData
 
   export let close = false
+
+  onMount(() => {
+    document.body.classList.add("films")
+
+    return () => document.body.classList.remove("films")
+  })
 </script>
-
-
 
 <Video srcs={data.film.fields.video} grabs={data.film.fields.screenGrabs}>
 	<nav slot="title">
