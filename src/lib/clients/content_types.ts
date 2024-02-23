@@ -39,6 +39,8 @@ export interface TypeCollaboratorFields {
     tagIdentifier?: EntryFieldTypes.Symbol;
     isADirector?: EntryFieldTypes.Boolean;
     photo?: EntryFieldTypes.AssetLink;
+    featuredFilm?: EntryFieldTypes.EntryLink<EntrySkeletonType>;
+    featuredFilms?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeFilmSkeleton>>;
     profession?: EntryFieldTypes.Symbol;
     linkLabel?: EntryFieldTypes.Symbol;
     link?: EntryFieldTypes.Symbol;
@@ -99,8 +101,9 @@ export interface TypeFilmFields {
     status?: EntryFieldTypes.Symbol<"Distribution" | "Production">;
     director?: EntryFieldTypes.EntryLink<TypeCollaboratorSkeleton>;
     ralisateur?: EntryFieldTypes.Symbol;
+    client?: EntryFieldTypes.Symbol;
     tags: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
-    poster: EntryFieldTypes.AssetLink;
+    poster?: EntryFieldTypes.AssetLink;
     full?: EntryFieldTypes.Boolean;
     teaser?: EntryFieldTypes.AssetLink;
     animationList?: EntryFieldTypes.AssetLink;
@@ -124,6 +127,7 @@ export function isTypeFilm<Modifiers extends ChainModifiers, Locales extends Loc
 }
 
 export interface TypeLooseTextFields {
+    title?: EntryFieldTypes.Symbol;
     body: EntryFieldTypes.RichText;
 }
 

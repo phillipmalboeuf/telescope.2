@@ -13,7 +13,7 @@
   let vedette;
 
   $: {
-    vedette = data.portfolio[0];
+    vedette = data.director.fields.featuredFilm || data.portfolio[0];
   }
 </script>
 
@@ -30,7 +30,7 @@
   </h1>
 </aside>
 
-<Content content={data.portfolio} />
+<Content content={data.director.fields.featuredFilms?.length ? data.director.fields.featuredFilms : data.portfolio} />
 
 <Table
   director={data.director.fields.tagIdentifier}

@@ -21,17 +21,14 @@
     media: Asset<"WITHOUT_UNRESOLVABLE_LINKS">
     poster: Asset<"WITHOUT_UNRESOLVABLE_LINKS">
   }
-  let visiblePosition: {
-    top: number
-    left: number
-  }
+  // let visiblePosition: {
+  //   top: number
+  //   left: number
+  // }
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<header class:visible on:mouseleave={() => visible = false} on:mousemove={(e) => visiblePosition = {
-  top: e.clientY,
-  left: e.clientX
-}}>
+<header class:visible on:mouseleave={() => visible = false}>
   <nav style="--length: {header.fields.links.length}">
     {#each header.fields.links as link}
     <div>
@@ -119,7 +116,7 @@
   </nav>
 
   {#if visibleMedia}
-  <figure transition:fade={{ duration: 333 }} style="top: {visiblePosition.top}px; left: {visiblePosition.left}px;">
+  <figure transition:fade={{ duration: 333 }}>
     <Media media={visibleMedia.media} poster={visibleMedia.poster} small eager />
   </figure>
   {/if}
@@ -321,9 +318,17 @@
         }
       }
 
+      ol:hover,
+      ol:has(a[focus]),
+      a:focus:has(+ ol) + ol,
+      a:hover:has(+ ol) + ol,
+      a.active:has(+ ol) + ol {
+        opacity: 1;
+      }
+
       ol,
       aside {
-        opacity: 1;
+        // opacity: 1;
         visibility: visible;
 
         @media (max-width: $mobile) {

@@ -50,8 +50,7 @@
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
   <figure bind:this={element} class:full class:wide on:mouseenter={() => video.play()} on:mouseleave={() => video.pause()}>
     {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
-    <!-- <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video poster={film.fields.poster} background /> -->
-    <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video background />
+    <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video poster={film.fields.poster} background />
     {:else}
     <Media media={film.fields.poster} ar={wide ? undefined : full ? undefined : undefined} small={!wide} />
     {/if}
@@ -144,18 +143,18 @@
       }
 
       &:after {
-        content: "";
-        pointer-events: none;
-        display: block;
-        height: 50vh;
-        width: 100%;
-        background-color: var(--background);
+        // content: "";
+        // pointer-events: none;
+        // display: block;
+        // height: 50vh;
+        // width: 100%;
+        // background-color: var(--background);
 
-        @media (min-width: $mobile) {
-          position: absolute;
-          bottom: 100%;
-          left: 0;
-        }
+        // @media (min-width: $mobile) {
+        //   position: absolute;
+        //   bottom: 100%;
+        //   left: 0;
+        // }
       }
     }
 
