@@ -28,7 +28,7 @@
   let more = false
   const moreLimit = 12
   
-  const out = ["recent","martin-c-pariseau","vincent-lortie","brittney-canda","jf-sauve","kristof-brandl","phil-chagnon","jb-proulx", "2017","2018","2019","2020","2021","2022"]
+  const out = ["recent","Recent","SERVICING","martin-c-pariseau","vincent-lortie","brittney-canda","jf-sauve","kristof-brandl","phil-chagnon","jb-proulx", "2017","2018","2019","2020","2021","2022"]
 
   $: { items = data?.items.filter(film => filter ? film.fields.tags?.map(tag => tag.toLowerCase()).includes(filter) : true) }
 </script>
