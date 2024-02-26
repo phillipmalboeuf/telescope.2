@@ -124,8 +124,7 @@ small,
 	line-height: $scale * 0.95;
 
 	@media (max-width: $mobile) {
-  //  font-size: $mobile_base * $mobile_scale * 0.75;
-	//  line-height: $scale * 0.95;
+   font-size: $mobile_base * $mobile_scale * 0.75;
   }
 }
 
