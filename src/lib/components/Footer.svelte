@@ -3,6 +3,8 @@
 
   import type { TypeNavigationSkeleton } from '$lib/clients/content_types'
   import type { Entry } from 'contentful'
+  import { goto, preloadData, pushState } from '$app/navigation'
+
   export let footer: Entry<TypeNavigationSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
 </script>
 
@@ -13,19 +15,33 @@
       <a href={link.fields.link} {...link.fields.external && { rel: "external", target: "_blank" }}>{link.fields.label}</a>
 
       {#if link.fields.subLinks}
-      <ul>
+      <ul class="small">
       {#each link.fields.subLinks as sublink}
         <li>
-          <a href={sublink.fields.link} {...sublink.fields.external && { rel: "external", target: "_blank" }}>{@html sublink.fields.label.replaceAll('\\n', '<br>')}</a>
+          <a href={sublink.fields.link} {...sublink.fields.external && { rel: "external", target: "_blank" }}
+            on:click={async (e) => {
+              if (sublink.fields.link !== '/contact' && sublink.fields.link !== '/pages/about') return;
+              if (e.metaKey) return;
+
+              e.preventDefault()
+              const { href } = e.currentTarget
+              const result = await preloadData(href)
+
+              if (result.type === 'loaded' && result.status === 200) {
+                pushState(href, { type: sublink.fields.link.includes('pages') ? 'page' : 'contact', open: result.data })
+              } else {
+                goto(href)
+              }
+            }}>{@html sublink.fields.label.replaceAll('\\n', '<br>')}</a>
         </li>
       {/each}
       </ul>
       {/if}
 
       {#if i === footer.fields.links.length - 1}
-      <aside>
-        <a href="">© 2023 Telescope</a>
-        <a href="">Web Design <strong>Caserne</strong></a>
+      <aside class="small">
+        <span>© 2023 Telescope</span>
+        <a href="http://caserne.com" target="_blank" rel="external">Web Design <strong>Caserne</strong></a>
       </aside>
       {/if}
     </div>
@@ -76,6 +92,10 @@
 
       div {
         flex: 1;
+
+        min-height: max(20vh, 20vw);
+        display: flex;
+        flex-direction: column;
         margin-bottom: $gap;
 
         &:not(:first-child) {
@@ -90,6 +110,7 @@
             ul {
               display: flex;
               flex-wrap: wrap;
+              align-items: flex-start;
 
               li {
                 width: 50%;
@@ -122,22 +143,32 @@
 
         ul {
           list-style: none;
-          margin: $gap 0 ($gap * 6);
+          margin: $gap 0;
 
           color: $grey;
-
-          @media (max-width: $mobile) {
-            margin-bottom: $gap * 3;
-          }
         }
 
         aside {
           color: $grey;
           display: flex;
           justify-content: space-between;
+          margin-top: auto;
 
-          strong {
-            color: var(--foreground-inverse);
+          a {
+            strong {
+              font-weight: normal;
+              color: var(--foreground-inverse);
+              transition: color 333ms;
+            }
+
+            &:hover,
+            &:focus {
+              color: var(--foreground-inverse);
+
+              strong {
+                color: $grey;
+              }
+            }
           }
         }
       }

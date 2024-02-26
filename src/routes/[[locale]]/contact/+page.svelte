@@ -27,16 +27,16 @@
   <nav>
     <h4>{item.fields.title}</h4>
 
-    <a href={item.fields.link} rel="external" target="_blank">{item.fields.linkLabel}</a>
+    <a class="small" href={item.fields.link} rel="external" target="_blank">{item.fields.linkLabel}</a>
 
     {#if item.fields.contacts?.length}
     <ul>
       {#each item.fields.contacts as person}
       <li>
-        <h5>{person.fields.name}</h5>
-        <h6>{person.fields.position}</h6>
-        {#if person.fields.phone}<a href={`tel:${person.fields.phone}`}><h6>{person.fields.phone}</h6></a>{/if}
-        {#if person.fields.email}<a href={`mailto:${person.fields.email}`}><h6>{@html person.fields.email.replace('@', '<div></div>@')}</h6></a>{/if}
+        <h5 class="small">{person.fields.name}</h5>
+        <h6 class="small">{person.fields.position}</h6>
+        {#if person.fields.phone}<a href={`tel:${person.fields.phone}`}><h6 class="small">{person.fields.phone}</h6></a>{/if}
+        {#if person.fields.email}<a href={`mailto:${person.fields.email}`}><h6 class="small">{@html person.fields.email.replace('@', '<div></div>@')}</h6></a>{/if}
       </li>
       {/each}
     </ul>
@@ -112,9 +112,7 @@
           margin-bottom: $gap;
 
           h5, h6 {
-            font-size: $base * 0.88;
             font-weight: normal;
-            line-height: 1.333;
           }
 
           h6 {
