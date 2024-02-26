@@ -160,6 +160,7 @@ button,
 	border: 1px solid transparent;
 	color: $black;
 	background-color: $grey-light;
+	// transition: background-color 333ms, color 333ms;
 
 	&.button--blur {
 		background-color: fade-out($grey-light, 0.5);
@@ -173,12 +174,24 @@ button,
 			backdrop-filter: blur(20px);
 		}
 
+		&:hover,
+		&:focus {
+			color: $white;
+			background-color: $black;
+		}
+
 		&.button--blur--dark,
 		html:has(.films) header &  {
 			color: $white;
 			background-color: fade-out($grey-dark, 0.5);
 			-webkit-backdrop-filter: blur(20px);
 			backdrop-filter: blur(20px);
+
+			&:hover,
+			&:focus {
+				color: $black;
+				background-color: $white;
+			}
 		}
 	}
 }

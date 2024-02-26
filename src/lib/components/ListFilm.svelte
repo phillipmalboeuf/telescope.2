@@ -72,9 +72,9 @@
         </footer>
       </div>
 
-      <button class="button--blur button--blur--light" on:click|stopPropagation|preventDefault={() => {
+      <button on:click|stopPropagation|preventDefault={() => {
         popup = false
-      }}>{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</button>
+      }}><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="white"/> <path d="M4.68701 4.95312L13.047 13.3131" stroke="#0F0F0F" stroke-width="2"/> <path d="M13.047 4.95312L4.68701 13.3131" stroke="#0F0F0F" stroke-width="2"/> </svg></button>
     </figcaption>
     {:else}
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
@@ -284,8 +284,15 @@
 
         > button {
           position: absolute;
-          top: $base;
-          right: $base;
+          padding: $base;
+          top: 0;
+          right: 0;
+
+          background-color: transparent;
+
+          svg path:first-child {
+            fill: white;
+          }
         }
       }
     }
