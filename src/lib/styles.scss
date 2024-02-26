@@ -169,7 +169,7 @@ button,
 
 		&.button--blur--light {
 			color: $white;
-			background-color: fade-out($white, 0.75);
+			background-color: fade-out($white, 0.85);
 			-webkit-backdrop-filter: blur(20px);
 			backdrop-filter: blur(20px);
 		}
