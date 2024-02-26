@@ -90,7 +90,7 @@
 <Table labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.director.fields.name}` }}
   columns={[
     { label: 'Projet', key: 'title' },
-    { label: 'Client', key: 'client' },
+    { label: 'Partenaires', key: 'client' },
     { label: 'Réalisateur', key: 'director' },
     { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }

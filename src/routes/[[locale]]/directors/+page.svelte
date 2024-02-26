@@ -16,7 +16,7 @@
 <Table tag='Commercial,videoclip' labels={{ open: 'Voir tous les projets', close: 'Projets commerciaux' }}
   columns={[
     { label: 'Projet', key: 'title' },
-    { label: 'Client', key: 'client' },
+    { label: 'Partenaires', key: 'client' },
     { label: 'Réalisateur', key: 'ralisateur' },
     { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }

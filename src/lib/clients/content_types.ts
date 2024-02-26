@@ -38,6 +38,7 @@ export interface TypeCollaboratorFields {
     name: EntryFieldTypes.Symbol;
     tagIdentifier?: EntryFieldTypes.Symbol;
     isADirector?: EntryFieldTypes.Boolean;
+    biographie?: EntryFieldTypes.Text;
     photo?: EntryFieldTypes.AssetLink;
     featuredFilm?: EntryFieldTypes.EntryLink<EntrySkeletonType>;
     featuredFilms?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeFilmSkeleton>>;

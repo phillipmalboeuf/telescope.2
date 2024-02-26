@@ -23,10 +23,9 @@
 
 <aside>
   <h1 class="h2">
-    {data.director.fields.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; information
-    sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed
+    {data.director.fields.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {#if data.director.fields.biographie}{data.director.fields.biographie}{:else}information sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed
     doquis eiusmod tempor eti incididunt. Ut labore et dolore magna aliquaut enim
-    ad minim veniam, nostrud exercitation ullamcoas laboris nisi ut aliquip commodo.
+    ad minim veniam, nostrud exercitation ullamcoas laboris nisi ut aliquip commodo.{/if}
   </h1>
 </aside>
 
@@ -40,7 +39,7 @@
   }}
   columns={[
     { label: "Projet", key: "title" },
-    { label: "Client", key: "client" },
+    { label: "Partenaires", key: "client" },
     { label: "Réalisateur", key: "director" },
     { label: "Catégorie", key: "tags" },
     { label: "Année", key: "publishedDate" },
