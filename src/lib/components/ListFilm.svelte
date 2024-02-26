@@ -13,6 +13,7 @@
   import type { MouseEventHandler } from 'svelte/elements'
   import { onMount } from 'svelte';
   import { boxes } from '$lib/collides';
+  import Status from './Status.svelte';
 
   export let i: number
   export let film: Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -79,10 +80,7 @@
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
       <h6>{film.fields.title}</h6>
       <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
-      <h6>{#if film.fields.status}<span class={film.fields.status}>{@html `${{
-        'Distribution': $page.data.locale === 'fr' ? 'En&nbsp;distribution' : 'In&nbsp;distribution',
-        'Production': $page.data.locale === 'fr' ? 'En&nbsp;production' : 'In&nbsp;production'
-      }[film.fields.status]}`}</span>{:else if film.fields.publishedDate}{year(film.fields.publishedDate)}{/if}</h6>
+      <h6><Status {film} /></h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
     {/if}
@@ -192,7 +190,7 @@
       position: -webkit-sticky;
       position: sticky;
       z-index: var(--index);
-      bottom: 40%;
+      bottom: calc(50% - ($base * 3));
       color: var(--foreground-inverse);
       padding: $base 0;
 
@@ -234,23 +232,6 @@
           &:nth-of-type(1) {
             // order: -1;
             width: 100%;
-          }
-        }
-
-        .Distribution,
-        .Production {
-          display: flex;
-          gap: $base * 0.5;
-          align-items: center;
-          justify-content: flex-end;
-
-          &:before {
-            content: "";
-            display: inline-block;
-            width: $base * 0.5555;
-            height: $base * 0.5555;
-            border-radius: 50%;
-            background-color: $green;
           }
         }
       }

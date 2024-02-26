@@ -13,6 +13,7 @@
 
   import type { PageData } from './$types'
   import { year } from '$lib/formatters'
+  import Status from '$lib/components/Status.svelte';
   
   export let data: PageData
 
@@ -36,7 +37,7 @@
       }} href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
     </h6>{/if}
     <h6></h6>
-    <h6>{#if data.film.fields.publishedDate}{year(data.film.fields.publishedDate)}{/if}</h6>
+    <h6><Status film={data.film} /></h6>
 
     {#if !close}<a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films" class="button">{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</a>{/if}
 	</nav>
