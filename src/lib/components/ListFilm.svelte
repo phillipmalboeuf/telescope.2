@@ -14,6 +14,7 @@
   import { onMount } from 'svelte';
   import { boxes } from '$lib/collides';
   import Status from './Status.svelte';
+  import TooLong from './TooLong.svelte';
 
   export let i: number
   export let film: Entry<TypeFilmSkeleton, "WITHOUT_UNRESOLVABLE_LINKS">
@@ -78,7 +79,7 @@
     </figcaption>
     {:else}
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
-      <h6>{film.fields.title}</h6>
+      <h6><TooLong hoverable content={film.fields.title} /></h6>
       <h6>{#if film.fields.director}{film.fields.director.fields.name}{:else if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
       <h6><Status {film} /></h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
@@ -186,7 +187,7 @@
       position: -webkit-sticky;
       position: sticky;
       z-index: var(--index);
-      bottom: calc(50% - ($base * 3));
+      bottom: calc(50% - ($type * 3.5));
       color: var(--foreground-inverse);
       padding: $base 0;
 
@@ -196,7 +197,7 @@
 
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-end;
+      align-items: center;
 
       @media (max-width: $mobile) {
         position: absolute;
@@ -205,7 +206,7 @@
       }
 
       h6 {
-        flex: 2;
+        width: 40%;
         padding: 0 $base;
 
         @media (max-width: $mobile) {
@@ -213,12 +214,11 @@
         }
 
         &:last-child {
-          flex: 1;
+          width: 20%;
           text-align: right;
         }
 
         @media (max-width: $mobile) {
-          flex: none;
           width: 50%;
 
           &:last-child {

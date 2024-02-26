@@ -6,6 +6,7 @@
   import { goto, preloadData, pushState } from '$app/navigation'
 
   import { page } from '$app/stores'
+  import TooLong from './TooLong.svelte';
 
   export let labels: {
     open: string
@@ -101,7 +102,7 @@
               goto(href)
             }
           }}
-          href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>{film.fields[column.key]}</a>
+          href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}><TooLong content={film.fields[column.key]} hoverable /></a>
         {:else}
         {film.fields[column.key] ? film.fields[column.key] : '–'}
         {/if}
@@ -176,6 +177,7 @@
     }
 
     table {
+      table-layout: fixed;
       width: 100%;
       border-collapse: collapse;
       margin-top: $gap * 3;
@@ -196,8 +198,16 @@
       }
 
       td {
-        padding: ($base * 0.25) 0;
+        padding: ($base * 0.1) 0;
         text-transform: capitalize;
+
+        :global(.marquee-container) {
+          margin-right: $base * 0.5;
+        }
+
+        &:has(button) {
+          padding: ($base * 0.5) 0;
+        }
       }
 
       tr:not(:has(> th)):not(:has(button)):hover,
