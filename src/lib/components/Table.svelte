@@ -133,6 +133,12 @@
       background-color: transparent !important;
       text-align: left;
       padding: 0;
+      transition: color 333ms;
+
+      &:hover,
+      &:focus {
+        color: $grey;
+      }
     }
 
     nav {
@@ -170,6 +176,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: $gap * 3;
 
       hr {
         margin: ($base * 0.5) 0 ($base * 0.5);
@@ -191,7 +198,7 @@
         text-transform: capitalize;
       }
 
-      tr:not(:has(> th)):hover,
+      tr:not(:has(> th)):not(:has(button)):hover,
       tr:has(a:focus) {
         background-color: $grey-light;
       }

@@ -60,12 +60,12 @@
     <figcaption class="popup" transition:fly={{ y: '100%', duration: 333 }}>
       <div>
         <h4>{film.fields.title}</h4>
-        <h5>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h5>
+        <h5>{#if film.fields.director}{film.fields.director.fields.name}{/if}</h5>
       </div>
 
       <div>
-        {#if film.fields.popup.fields.title}<h3>{film.fields.popup.fields.title}</h3>{/if}
-        {#if film.fields.popup.fields.body}<Document body={film.fields.popup.fields.body} />{/if}
+        {#if film.fields.popup.fields.title}<h4 class="title">{@html film.fields.popup.fields.title.replaceAll('\\n', '<br>')}</h4>{/if}
+        {#if film.fields.popup.fields.body}<div class="small"><Document body={film.fields.popup.fields.body} /></div>{/if}
 
         <footer>
           {#if film.fields.popup.fields.link}<a class="button" href="{film.fields.popup.fields.link}">{film.fields.popup.fields.linkLabel}</a>{/if}
@@ -251,7 +251,7 @@
           padding: $mobile_base;
         }
 
-        div {
+        > div {
           flex: 1;
 
           @media (max-width: $mobile) {
@@ -271,11 +271,13 @@
             margin-bottom: $base * 0.5;
           }
 
-          h3 {
+          h4.title {
             margin-bottom: auto;
+            width: 70%;
           }
 
           h5 {
+            margin-bottom: 100%;
             opacity: 0.5;
           }
           
