@@ -17,7 +17,9 @@
   {/if}
 </svelte:head>
 
+{#if !["/[[locale]]/pages/[id]", "/[[locale]]/films/[id]"].includes($page.route.id)}
 <Header header={data.header}  />
+{/if}
 
 <main class={$page.route.id.replace('/[[locale]]/', '').replace('/[id]', '')}>
   <slot />

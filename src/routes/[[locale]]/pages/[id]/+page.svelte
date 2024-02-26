@@ -16,8 +16,11 @@
 </svelte:head>
 
 <main>
-  <section>
+  <nav>
+    <a href="{$page.data.locale === 'fr' ? '/' : `/${$page.data.locale}`}">Telescope</a>
     <h1 class="h6">{data.page.fields.title}</h1>
+  </nav>
+  <section>
     <Content content={data.page.fields.content} />
     <div></div>
   </section>
@@ -31,7 +34,7 @@
   main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    // justify-content: flex-end;
     min-height: 100vh;
     padding: $base;
 
@@ -50,16 +53,35 @@
       }
     }
 
+    nav {
+      width: 100%;
+      display: flex;
+
+      > a,
+      > h1 {
+        flex: 1;
+      }
+
+      > a {
+        opacity: 0.5;
+        transition: opacity 333ms;
+
+        &:hover,
+        &:focus {
+          opacity: 1;
+        }
+      }
+    }
+
     section {
-      width: 50%;
+      width: 100%;
       min-height: 75vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       gap: $gap;
-      border-left: 1px solid $grey;
-      padding-left: $base;
-      padding-right: $gap * 2;
+      // border-left: 1px solid $grey;
+      padding: ($gap * 2) 0;
 
       @media (max-width: $mobile) {
         width: 100%;

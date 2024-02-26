@@ -46,7 +46,7 @@
         align-items: center;
         gap: $base;
 
-        > :global(*) {
+        > :global(p) {
           max-width: $max;
         }
       }

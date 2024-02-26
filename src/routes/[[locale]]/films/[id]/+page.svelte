@@ -14,6 +14,7 @@
   import type { PageData } from './$types'
   import { year } from '$lib/formatters'
   import Status from '$lib/components/Status.svelte';
+  import { collides } from '$lib/collides';
   
   export let data: PageData
 
@@ -32,22 +33,22 @@
   })
 </script>
 
-<Video srcs={data.film.fields.video} grabs={data.film.fields.screenGrabs}>
-	<nav slot="title">
-		<h6>{data.film.fields.title}</h6>
-    <h6></h6>
-    {#if data.film.fields.director}<h6>
-      <a on:click={(e) => {
-        const { href } = e.currentTarget
-        pushState(href, {})
-      }} href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
-    </h6>{/if}
-    <h6></h6>
-    <h6><Status film={data.film} /></h6>
+<nav>
+  <div use:collides>{data.film.fields.title}</div>
+  {#if data.film.fields.director}<div use:collides>
+    <a on:click={(e) => {
+      const { href } = e.currentTarget
+      pushState(href, {})
+    }} href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{data.film.fields.director.fields.tagIdentifier}">{data.film.fields.director.fields.name}</a>
+  </div>{/if}
+  <div use:collides><Status film={data.film} /></div>
 
-    {#if !close}<a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films" class="button">{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</a>{/if}
-	</nav>
-</Video>
+  <div use:collides>
+  {#if !close}<a href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films" class="button">{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</a>{/if}
+  </div>
+</nav>
+
+<Video srcs={data.film.fields.video} grabs={data.film.fields.screenGrabs} />
 
 {#if data.film.fields.description}
 <main>
@@ -206,19 +207,37 @@
   }
 
   nav {
+    position: fixed;
+    z-index: 2001;
+    top: 0;
+    left: 0;
+    width: 100vw;
+
     display: flex;
     justify-content: space-between;
     padding: ($base * 0.75) 0;
 
-    h6 {
-      flex: 1;
+    div {
+      width: 25%;
       padding: 0 ($base * 0.75);
+
+      &:global(.collides) {
+        color: $white !important;
+      }
+
+      &:first-child {
+        width: 25%;
+      }
+
+      &:last-child {
+        text-align: right;
+      }
     }
 
-    > a {
-      position: absolute;
-      top: ($base * 0.75);
-      right: ($base * 0.75);
-    }
+    // > a {
+    //   position: absolute;
+    //   top: ($base * 0.75);
+    //   right: ($base * 0.75);
+    // }
   }
 </style>

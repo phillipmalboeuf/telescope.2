@@ -202,6 +202,7 @@
       @media (max-width: $mobile) {
         position: absolute;
         width: 100%;
+        bottom: calc(50% - ($type * 2));
         padding: $mobile_base 0;
       }
 
