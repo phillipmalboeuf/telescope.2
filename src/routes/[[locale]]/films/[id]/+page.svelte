@@ -47,13 +47,19 @@
 <main>
   <div>
     <h4>Film</h4>
-    <Document body={data.film.fields.description} />
+
+    <div class="small">
+      <Document body={data.film.fields.description} />
+    </div>
   </div>
   
   <div>
     {#if data.film.fields.distribution}
     <h4>Distributions</h4>
-    <Document body={data.film.fields.distribution} />
+
+    <div class="small">
+      <Document body={data.film.fields.distribution} />
+    </div>
     {/if}
   </div>
   
@@ -61,14 +67,20 @@
   <div>
     {#if data.film.fields.synopsis}
     <h4>Synopsis</h4>
-    <Document body={data.film.fields.synopsis} />
+
+    <div class="small">
+      <Document body={data.film.fields.synopsis} />
+    </div>
     {/if}
   </div>
   
   {#if data.film.fields.prix}
   <div>
     <h4>Prix et distinctions</h4>
-    <Document body={data.film.fields.prix} />
+
+    <div class="small">
+      <Document body={data.film.fields.prix} />
+    </div>
   </div>
   {/if}
 </main>
@@ -121,9 +133,12 @@
     > div {
       flex: 1;
       padding-right: $base;
-      display: flex;
-      flex-direction: column;
-      gap: $base;
+      
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: $base;
+      }
 
       :global(html:has(.films)) & {
         border-color: $grey;

@@ -107,6 +107,14 @@
   <figcaption class="controls">
     <button on:click={togglePaused}>{#if paused}Play{:else}Pause{/if}</button>
     <button on:click={toggleVolume}>{#if volume}Sound Off{:else}Sound On{/if}</button>
+
+    <div>
+      {#if duration}
+      <label for="time" style="left: {time / duration * 100}%">{format(time)} / {format(duration)}</label>
+      <input id="time" name="time" type="range" value={time} min={0} step={0.01} max={duration}
+        on:input={e => seek(e.currentTarget.value)} />
+      {/if}
+    </div>
     
     <!-- <span>
       <span on:mouseenter={() => showResolutions = true} on:mouseleave={() => showResolutions = false}>
@@ -124,19 +132,13 @@
     </span> -->
   </figcaption>
 
-  <figcaption class="seeker">
-    {#if duration}
-    <label for="time" style="left: {time / duration * 100}%">{format(time)} / {format(duration)}</label>
-    <input id="time" name="time" type="range" value={time} min={0} step={0.01} max={duration}
-      on:input={e => seek(e.currentTarget.value)} />
-    {/if}
-
-    <!-- {#if buffered}
+  <!-- <figcaption class="seeker">
+    {#if buffered}
     {#each buffered as { start, end }}
     <div class="buffer" style="left: {start / duration * 100}%; width: {(end - start) / duration * 100}%;" />
     {/each}
-    {/if} -->
-  </figcaption>
+    {/if}
+  </figcaption> -->
 </figure>
 
 <!-- {#if grabs}
@@ -201,17 +203,27 @@
 
   figcaption.controls {
     position: absolute;
-    left: 0;
-    bottom: $base;
-    width: 100%;
+    left: $base;
+    bottom: 0;
+    // padding: 0 $base;
+    width: calc(100% - ($base * 2));
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
   }
 
-    button {
+    button,
+    div {
+      flex: 1;
+      text-align: left;
       color: $white;
       background-color: transparent;
+      padding: $base 0;
+    }
+
+    div {
+      flex: 2;
+      text-align: right;
     }
 
     button.faded {
@@ -219,14 +231,14 @@
     }
 
     label[for="time"] {
-      position: absolute;
-      bottom: $gap * 3;
-      font-size: var(--tiny);
-      transform: translateX(-50%);
+      // position: absolute;
+      // bottom: $gap * 3;
+      // font-size: var(--tiny);
+      // transform: translateX(-50%);
     }
 
     figure.fullscreen input[type="range"] {
-      bottom: 30px;
+      // bottom: 30px;
     }
 
     input[type="range"] {

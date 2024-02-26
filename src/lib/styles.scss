@@ -118,7 +118,8 @@ p {
 }
 
 small,
-.small {
+.small,
+.small p {
 	font-size: $base * $scale * 0.75;
 	line-height: $scale * 0.95;
 

@@ -198,7 +198,7 @@
 
       ol,
       aside {
-        opacity: 0;
+        // opacity: 0;
         visibility: hidden;
         transition: opacity 666ms;
 
