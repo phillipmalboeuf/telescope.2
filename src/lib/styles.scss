@@ -60,7 +60,7 @@ h1,
 	font-size: $base * $scale * 3;
 
 	@media (max-width: $mobile) {
-    font-size: $mobile_base * $mobile_scale * 3;
+    font-size: $mobile_base * $mobile_scale * 2;
   }
 }
 
@@ -69,7 +69,7 @@ h2,
 	font-size: $base * $scale * 2;
 
 	@media (max-width: $mobile) {
-    font-size: $mobile_base * $mobile_scale * 2;
+    font-size: $mobile_base * $mobile_scale * 1;
   }
 }
 
