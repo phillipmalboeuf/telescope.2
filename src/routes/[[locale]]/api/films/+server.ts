@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({ url }) => {
 
   const films = await content.getEntries<TypeFilmSkeleton>({
     content_type: 'film',
-    include: 0,
+    include: 1,
     limit: 400,
     "fields.title[exists]": true,
     order: ["-fields.publishedDate"],
@@ -23,5 +23,16 @@ export const GET: RequestHandler = async ({ url }) => {
     } : {}
   })
 
-	return json(films);
+	return json({
+    ...films,
+    items: films.items.map(film => {
+      delete film.fields.relatedContent
+      
+      if (film.fields.director) {
+        delete film.fields.director.fields.featuredFilm
+        delete film.fields.director.fields.featuredFilms
+      }
+      return film
+    })
+  });
 };

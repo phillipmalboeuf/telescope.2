@@ -17,7 +17,7 @@
   columns={[
     { label: 'Projet', key: 'title' },
     { label: 'Partenaires', key: 'client' },
-    { label: 'Réalisateur', key: 'director' },
+    { label: 'Réalisateur', key: 'ralisateur' },
     { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }
   ]} />

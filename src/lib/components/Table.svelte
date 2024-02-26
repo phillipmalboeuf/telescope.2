@@ -81,6 +81,8 @@
       <td>
         {#if column.key === 'tags' && film.fields.tags}
         {film.fields.tags.filter(tag => !out.includes(tag)).join(' ')}
+        {:else if column.key === 'ralisateur' && film.fields.director}
+        {film.fields.director.fields.name}
         {:else if column.key.includes('Date')}
         {film.fields[column.key] ? year(film.fields[column.key]) : '–'}
         {:else}

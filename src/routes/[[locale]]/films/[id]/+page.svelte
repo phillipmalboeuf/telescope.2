@@ -20,9 +20,15 @@
   export let close = false
 
   onMount(() => {
-    document.body.classList.add("films")
+    if (data.film.fields.tags.includes("film")) {
+      document.body.classList.add("films")
 
-    return () => document.body.classList.remove("films")
+      return () => document.body.classList.remove("films")
+    } else {
+      document.body.classList.add("directors")
+
+      return () => document.body.classList.remove("directors")
+    }
   })
 </script>
 
@@ -104,7 +110,7 @@
   columns={[
     { label: 'Projet', key: 'title' },
     { label: 'Partenaires', key: 'client' },
-    { label: 'Réalisateur', key: 'director' },
+    { label: 'Réalisateur', key: 'ralisateur' },
     { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }
   ]} />
@@ -193,6 +199,10 @@
         }
       }
     }
+
+    :global(html:has(.directors)) & {
+      background-color: $white;
+    }
   }
 
   nav {
@@ -203,10 +213,6 @@
     h6 {
       flex: 1;
       padding: 0 ($base * 0.75);
-
-      &:nth-child(2) {
-        // text-align: center;
-      }
     }
 
     > a {

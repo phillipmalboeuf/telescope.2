@@ -108,7 +108,7 @@
       <a href="/"><small>Français</small></a>
       {/if}
     </small>
-    <div><button on:click={()=> {
+    <div><button class="button--blur" on:click={()=> {
       visible = !visible
       films = false
       directors = false

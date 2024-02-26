@@ -160,6 +160,27 @@ button,
 	border: 1px solid transparent;
 	color: $black;
 	background-color: $grey-light;
+
+	&.button--blur {
+		background-color: fade-out($grey-light, 0.5);
+		-webkit-backdrop-filter: blur(20px);
+		backdrop-filter: blur(20px);
+
+		&.button--blur--light {
+			color: $white;
+			background-color: fade-out($white, 0.75);
+			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
+		}
+
+		&.button--blur--dark,
+		html:has(.films) header &  {
+			color: $white;
+			background-color: fade-out($grey-dark, 0.5);
+			-webkit-backdrop-filter: blur(20px);
+			backdrop-filter: blur(20px);
+		}
+	}
 }
 
 svg {

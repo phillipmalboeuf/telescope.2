@@ -68,18 +68,18 @@
         {#if film.fields.popup.fields.body}<div class="small"><Document body={film.fields.popup.fields.body} /></div>{/if}
 
         <footer>
-          {#if film.fields.popup.fields.link}<a class="button" href="{film.fields.popup.fields.link}">{film.fields.popup.fields.linkLabel}</a>{/if}
+          {#if film.fields.popup.fields.link}<a class="button button--blur button--blur--light" href="{film.fields.popup.fields.link}">{film.fields.popup.fields.linkLabel}</a>{/if}
         </footer>
       </div>
 
-      <button on:click|stopPropagation|preventDefault={() => {
+      <button class="button--blur button--blur--light" on:click|stopPropagation|preventDefault={() => {
         popup = false
       }}>{#if $page.data.locale === 'fr'}Fermer{:else}Close{/if}</button>
     </figcaption>
     {:else}
     <figcaption transition:fly={{ y: '100%', duration: 333 }}>
       <h6>{film.fields.title}</h6>
-      <h6>{#if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
+      <h6>{#if film.fields.director}{film.fields.director.fields.name}{:else if film.fields.ralisateur}{film.fields.ralisateur}{/if}</h6>
       <h6><Status {film} /></h6>
       <!-- {#if item.fields.tags}<h6><Tag id={item.fields.tags[0]} /></h6>{/if} -->
     </figcaption>
@@ -87,7 +87,7 @@
 
     {#if film.fields.popup && !popup}
     <aside transition:fly={{ y: '100%', duration: 333 }}>
-      <button on:click|stopPropagation|preventDefault={() => {
+      <button class="button--blur button--blur--light" on:click|stopPropagation|preventDefault={() => {
         popup = true
       }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} ↗</button>
     </aside>
@@ -179,10 +179,6 @@
 
       button {
         padding: ($base * $scale * 0.25) ($base * $scale * 0.5);
-        color: var(--foreground-inverse);
-        background-color: fade-out($white, 0.5);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
       }
     }
 
@@ -279,10 +275,6 @@
           h5 {
             margin-bottom: 100%;
             opacity: 0.5;
-          }
-          
-          a.button {
-            color: var(--foreground);
           }
 
           footer {
