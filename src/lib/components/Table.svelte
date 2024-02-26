@@ -188,6 +188,17 @@
 
       th, td {
         width: calc(100% / var(--length));
+
+        @media (max-width: $mobile) {
+          width: calc(100% / (var(--length) - 2));
+          &:nth-child(2) {
+            display: none;
+          }
+
+          &:last-child {
+            display: none;
+          }
+        }
       }
 
       th {
