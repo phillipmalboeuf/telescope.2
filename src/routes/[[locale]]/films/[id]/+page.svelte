@@ -72,7 +72,7 @@
   
   <div>
     {#if data.film.fields.synopsis}
-    <h4>Synopsis</h4>
+    <h4>Notes</h4>
 
     <div class="small">
       <Document body={data.film.fields.synopsis} />
