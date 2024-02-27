@@ -77,11 +77,6 @@
         {#each $page.data.films as film}
         <li><a
           on:click={() => visible = false}
-          on:mouseenter={() => visibleMedia = {
-            media: film.fields.animationList || film.fields.teaser,
-            poster: film.fields.poster
-          }}
-          on:mouseleave={() => visibleMedia = undefined}
           href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/films/{film.fields.identifier}">{film.fields.title}</a></li>
         {/each}
       </ol>
