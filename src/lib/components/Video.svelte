@@ -40,6 +40,7 @@
 
   function toggleVolume() {
     volume = volume ? 0 : 1
+    localStorage.setItem("volume", volume ? "on" : "muted")
   }
 
   function selectResolution(index) {
@@ -81,6 +82,8 @@
 
   onMount(() => {
     document.addEventListener('webkitfullscreenchange', toggleFullscreen, false)
+
+    volume = localStorage.getItem("volume") === "muted" ? 0 : 1
 
     return () => document.removeEventListener('webkitfullscreenchange', toggleFullscreen)
   })
