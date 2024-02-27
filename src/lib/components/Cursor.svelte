@@ -1,25 +1,7 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   let hovering = false
   let x: number
   let y: number
-
-  onMount(() => {
-    // document.addEventListener('mouseenter', (e) => {
-    //   console.log(e.target.nodeName, e.currentTarget.nodeName)
-    // })
-    // const hoverables = [...Array.from(document.querySelectorAll('button')), ...Array.from(document.querySelectorAll('a[href]'))]
-
-    // hoverables.forEach(hoverable => {
-    //   hoverable.addEventListener('mouseenter', () => {
-    //     hovering = true
-    //   })
-    //   hoverable.addEventListener('mouseleave', () => {
-    //     hovering = false
-    //   })
-    // })
-  })
 </script>
 
 <svelte:document on:mousemove={(e) => {
@@ -61,7 +43,7 @@
 
     &.hovering {
       transform: translate(-50%, -50%) scale(0.88);
-      border-radius: 25%;
+      border-radius: 0%;
     }
   }
 </style>
