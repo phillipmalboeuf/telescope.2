@@ -71,8 +71,9 @@
   } */
 
   .hoverable {
+    pointer-events: auto !important;
     animation: marquee linear infinite;
-    animation-play-state: paused; 
+    animation-play-state: paused;
   }
 
   .hoverable:hover {
