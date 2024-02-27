@@ -154,6 +154,7 @@ button:focus:not(:focus-visible) {
 
 button,
 .button {
+	pointer-events: auto !important;
 	// cursor: pointer;
 	display: inline-block;
 	padding: ($base * $scale * 0.125) ($base * $scale * 0.333);

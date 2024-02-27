@@ -48,9 +48,9 @@
   })
 </script>
 
-<a on:click={go}
+<a on:mouseenter={() => video.play()} on:mouseleave={() => video.pause()} on:click={go}
   href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}>
-  <figure bind:this={element} class:full class:wide on:mouseenter={() => video.play()} on:mouseleave={() => video.pause()}>
+  <figure bind:this={element} class:full class:wide>
     {#if $page.data.device === 'desktop' && (film.fields.animationList || film.fields.teaser)}
     <Media media={film.fields.animationList || film.fields.teaser} small={!wide} bind:video poster={film.fields.poster} background />
     {:else}
