@@ -139,12 +139,41 @@
 
     > div {
       flex: 1;
-      padding-right: $base;
+      position: relative;
+
+      &:after,
+      &:before {
+        pointer-events: none;
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        right: 0;
+        width: 100%;
+        height: 10vh;
+        --turn: 1turn;
+        background: linear-gradient(var(--turn), var(--background) 0%, transparent 100%);
+
+        :global(html:has(.films)) & {
+          background: linear-gradient(var(--turn), $black-light 0%, transparent 100%);
+        }
+      }
+
+      &:before {
+        --turn: 0.5turn;
+        top: 10vh;
+        bottom: auto;
+      }
       
       > div {
         display: flex;
         flex-direction: column;
         gap: $base;
+
+        max-height: 50vh;
+        overflow-y: auto;
+        padding-right: $base;
+        padding-top: 10vh;
+        padding-bottom: 10vh;
       }
 
       :global(html:has(.films)) & {
@@ -155,7 +184,7 @@
       &:not(:first-child) { padding-left: $base; }
 
       h4 {
-        margin-bottom: 20vh;
+        margin-bottom: 10vh;
       }
 
       :global(td),
