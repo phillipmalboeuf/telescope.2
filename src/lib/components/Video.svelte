@@ -163,11 +163,11 @@
     z-index: 2000;
 
     color: white;
-    cursor: default;
+    // cursor: default;
   }
 
   figure.inactive {
-    cursor: none;
+    // cursor: none;
   }
 
   figure.fullscreen video {
@@ -251,7 +251,7 @@
       width: 100%;
       margin: 0;
 
-      cursor: col-resize;
+      // cursor: col-resize;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;

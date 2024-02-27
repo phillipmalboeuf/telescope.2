@@ -1,0 +1,67 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+
+  let hovering = false
+  let x: number
+  let y: number
+
+  onMount(() => {
+    // document.addEventListener('mouseenter', (e) => {
+    //   console.log(e.target.nodeName, e.currentTarget.nodeName)
+    // })
+    // const hoverables = [...Array.from(document.querySelectorAll('button')), ...Array.from(document.querySelectorAll('a[href]'))]
+
+    // hoverables.forEach(hoverable => {
+    //   hoverable.addEventListener('mouseenter', () => {
+    //     hovering = true
+    //   })
+    //   hoverable.addEventListener('mouseleave', () => {
+    //     hovering = false
+    //   })
+    // })
+  })
+</script>
+
+<svelte:document on:mousemove={(e) => {
+
+  // @ts-ignore
+  if (!hovering && ['BUTTON', 'A', 'VIDEO'].includes(e.target.nodeName)) {
+    hovering = true
+
+  // @ts-ignore
+  } else if (hovering && !['BUTTON', 'A', 'VIDEO'].includes(e.target.nodeName)) {
+    hovering = false
+  }
+
+  x = e.clientX
+  y = e.clientY
+}} />
+
+{#if x}
+<figure style:left={`${x}px`} style:top={`${y}px`} class:hovering />
+{/if}
+
+
+<style lang="scss">
+  figure {
+    position: fixed;
+    z-index: 6666;
+    width: $base * $scale; 
+    height: $base * $scale;
+    border-radius: 50%;
+    background-color: black;
+    transform: translate(-50%, -50%);
+    transition: transform 666ms, border-radius 666ms;
+    pointer-events: none;
+
+    @supports (mix-blend-mode: exclusion) {
+      background-color: white;
+      mix-blend-mode: exclusion;
+    }
+
+    &.hovering {
+      transform: translate(-50%, -50%) scale(0.88);
+      border-radius: 25%;
+    }
+  }
+</style>
