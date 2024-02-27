@@ -43,7 +43,7 @@
 
     &.hovering {
       transform: translate(-50%, -50%) scale(0.88);
-      border-radius: 25%;
+      // border-radius: 25%;
     }
   }
 </style>
