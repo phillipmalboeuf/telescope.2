@@ -11,7 +11,7 @@ export const load = async ({ locals, params, url, request }) => {
     content.getEntries<TypeTagSkeleton>({ content_type: 'tag', select: ['sys.id', 'fields.title', 'fields.identifier', 'fields.isACollaborator'], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
     content.getEntries<TypePopupSkeleton>({ content_type: 'popup', select: ['sys.id', 'fields.title', 'fields.body', 'fields.link', 'fields.poster', 'fields.linkLabel'], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
     content.getEntries<TypeFilmSkeleton>({ content_type: 'film', "fields.tags": "film", select: ['sys.id', 'fields.title', 'fields.identifier', 'fields.poster', 'fields.animationList', 'fields.teaser'], order: ["-fields.publishedDate"], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
-    content.getEntries<TypeCollaboratorSkeleton>({ content_type: "collaborator", "fields.isADirector": true, select: ['sys.id', 'fields.name', 'fields.tagIdentifier'], order: ["fields.name"], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
+    content.getEntries<TypeCollaboratorSkeleton>({ content_type: "collaborator", "fields.isADirector": true, select: ['sys.id', 'fields.name', 'fields.tagIdentifier', 'fields.featuredFilm'], include: 2, order: ["fields.name"], locale: { 'en': 'en-US' }[params.locale] || 'fr-CA' }),
   ])
 
   return {

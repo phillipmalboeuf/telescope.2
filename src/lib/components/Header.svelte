@@ -92,7 +92,12 @@
         {#each $page.data.directors as director}
         <li><a
           on:click={() => visible = false}
-          on:mouseenter={() => visibleMedia = undefined}
+          on:mouseenter={() => {
+            visibleMedia = {
+              media: director.fields.featuredFilm?.fields.teaser,
+              poster: director.fields.featuredFilm?.fields.poster
+            }
+          }}
           on:mouseleave={() => visibleMedia = undefined}
           href="{$page.data.locale === 'fr' ? '' : `/${$page.data.locale}`}/directors/{director.fields.tagIdentifier}">{director.fields.name}</a></li>
         {/each}
@@ -117,7 +122,7 @@
 
   {#if visibleMedia}
   <figure transition:fade={{ duration: 333 }}>
-    <Media media={visibleMedia.media} poster={visibleMedia.poster} small eager />
+    <Media media={visibleMedia.media} poster={visibleMedia.poster} small eager background />
   </figure>
   {/if}
 </header>
@@ -389,13 +394,15 @@
 
     figure {
       position: absolute;
-      width: 20vw;
-      height: 12.5vw;
+      top: $base * 4;
+      left: calc(60% + $base);
+      width: 25vw;
+      height: calc(25vw * 0.5625);
       background-color: $black;
 
       overflow: hidden;
-      border-radius: $base * 0.5;
-      transform: translate(-50%, 15%);
+      // border-radius: $base * 0.5;
+      // transform: translate(-50%, 15%);
 
       :global(video) {
         display: block;
