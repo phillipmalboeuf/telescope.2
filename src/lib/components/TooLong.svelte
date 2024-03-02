@@ -47,7 +47,7 @@
   .marquee-content {
     position: relative;
     white-space: nowrap;
-    display: inline-block;
+    /* display: inline-block; */
   }
 
   /* .no-autoplay {

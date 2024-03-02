@@ -77,7 +77,19 @@
     </tr>
 
     {#each items.filter((_, i) => more || i < moreLimit) as film, i}
-    <tr>
+    <tr on:click={async (e) => {
+      if (e.metaKey) return;
+
+      e.preventDefault()
+      const href = `${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`
+      const result = await preloadData(href)
+
+      if (result.type === 'loaded' && result.status === 200) {
+        pushState(href, { type: 'film', open: result.data })
+      } else {
+        goto(href)
+      }
+    }}>
       {#each columns as column, i}
       <td>
         {#if column.key === 'tags' && film.fields.tags}
@@ -89,19 +101,6 @@
         {:else}
         {#if i === 0}
         <a
-          on:click={async (e) => {
-            if (e.metaKey) return;
-
-            e.preventDefault()
-            const { href } = e.currentTarget
-            const result = await preloadData(href)
-
-            if (result.type === 'loaded' && result.status === 200) {
-              pushState(href, { type: 'film', open: result.data })
-            } else {
-              goto(href)
-            }
-          }}
           href={`${$page.data.locale === 'fr' ? `/films/${film.fields.identifier}` : `/${$page.data.locale}/films/${film.fields.identifier}`}`}><TooLong content={film.fields[column.key]} hoverable /></a>
         {:else}
         {film.fields[column.key] ? film.fields[column.key] : '–'}
@@ -157,6 +156,7 @@
 
       > div {
         display: flex;
+        flex-wrap: wrap;
         gap: $base * 0.5;
 
         button {
@@ -188,17 +188,6 @@
 
       th, td {
         width: calc(100% / var(--length));
-
-        @media (max-width: $mobile) {
-          width: calc(100% / (var(--length) - 2));
-          &:nth-child(2) {
-            display: none;
-          }
-
-          &:last-child {
-            display: none;
-          }
-        }
       }
 
       th {
@@ -224,6 +213,41 @@
       tr:not(:has(> th)):not(:has(button)):hover,
       tr:has(a:focus) {
         background-color: $grey-light;
+      }
+
+      @media (max-width: $mobile) {
+        display: flex;
+        flex-direction: column;
+        margin-top: $gap;
+        
+        tr {
+          padding: ($mobile_base * 0.25) 0 ($mobile_base * 0.5);
+          border-top: 1px solid;
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+
+          &:has(th) {
+            display: none;
+          }
+
+          td {
+            font-size: $mobile_base;
+            width: 50%;
+
+            &:first-child {
+              order: -2;
+            }
+
+            &:nth-child(3) {
+              order: -1;
+            }
+
+            &:last-child {
+              display: none;
+            }
+          }
+        }
       }
     }
 
