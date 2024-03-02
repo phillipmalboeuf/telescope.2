@@ -195,7 +195,7 @@
 
       @media (max-width: $mobile) {
         bottom: auto;
-        top: 0;
+        top: $base * 2.5;
 
         button {
           span {
@@ -268,7 +268,7 @@
         min-height: 50vh;
 
         @media (max-width: $mobile) {
-          top: 0;
+          top: $base * 3;
           bottom: auto;
           padding: $mobile_base;
         }
