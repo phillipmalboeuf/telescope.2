@@ -108,7 +108,7 @@
     on:click={togglePaused} />
   
   <figcaption class="controls">
-    <button on:click={togglePaused}>{#if paused}Play{:else}Pause{/if}</button>
+    <button class="button--blur button--blur--dark" on:click={togglePaused}>{#if paused}Play{:else}Pause{/if}</button>
     <button on:click={toggleVolume}>{#if volume}Sound Off{:else}Sound On{/if}</button>
 
     <div>
@@ -156,6 +156,11 @@
     height: 100vh;
     background: $black;
     // object-fit: cover;
+
+    @media (max-width: $mobile) {
+      height: 50vh;
+      object-fit: cover;
+    }
   }
 
   figure {
@@ -180,7 +185,9 @@
   }
 
   figure.inactive figcaption {
-    opacity: 0;
+    @media (min-width: $mobile) {
+      opacity: 0;
+    }
   }
 
   figcaption.title {
@@ -213,6 +220,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
+    @media (max-width: $mobile) {
+      left: 0;
+      bottom: $mobile_base;
+      width: 100%;
+    }
   }
 
     button,
@@ -220,8 +233,22 @@
       flex: 1;
       text-align: left;
       color: $white;
-      background-color: transparent;
-      padding: $base 0;
+
+      @media (min-width: $mobile) {
+        background-color: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        padding: $base 0;
+      }
+
+      @media (max-width: $mobile) {
+        &:not(:first-child) { display: none; }
+        
+        flex: none;
+        margin-left: auto;
+        margin-right: $mobile_base;;
+        padding: ($base * 0.33) ($base * $scale);
+      }
     }
 
     div {
@@ -257,6 +284,10 @@
       appearance: none;
       height: 2px;
       background-color: $white;
+
+      @media (max-width: $mobile) {
+        display: none;
+      }
     }
 
     // figure.fullscreen input[type="range"] {

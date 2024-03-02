@@ -223,7 +223,7 @@
           width: 50%;
 
           &:last-child {
-            // text-align: left;
+            width: 50%;
           }
 
           &:nth-of-type(1) {

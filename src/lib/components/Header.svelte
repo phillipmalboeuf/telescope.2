@@ -69,6 +69,7 @@
           }
         }}
         on:pointerenter={async () => {
+          if ($page.data.device !== 'desktop') return
           visible = true
         }}><span use:collides>{link.fields.label}</span></a>
 

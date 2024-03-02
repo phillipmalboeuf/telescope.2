@@ -272,10 +272,32 @@
       }
     }
 
-    // > a {
-    //   position: absolute;
-    //   top: ($base * 0.75);
-    //   right: ($base * 0.75);
-    // }
+    @media (max-width: $mobile) {
+      position: relative;
+      padding: 0;
+
+      div {
+        position: absolute;
+        z-index: 20;
+        top: $base;
+        left: 0;
+
+        &:first-child {
+          width: 75%;
+          font-size: $mobile_base * $mobile_scale * 1.15;
+        }
+
+        &:not(:first-child) {
+          position: absolute;
+          top: calc(50vh + ($base));
+          left: 0;
+          width: 50%;
+        }
+
+        &:nth-last-child(2) {
+          left: 50%;
+        }
+      }
+    }
   }
 </style>
