@@ -30,12 +30,18 @@
     flex-wrap: wrap;
     align-items: flex-end;
 
+    // @media (max-width: $mobile) {
+    //   &:has(.full) {
+        
+    //     height: 100vh;
+    //     overflow-y: auto;
+    //   }
+    // }
+
     @media (max-width: $mobile) {
-      &:has(.full) {
-        scroll-snap-type: y mandatory;
-        scroll-behavior: smooth;
-        height: 100vh;
-        overflow-y: auto;
+      &:after {
+        content: "";
+        scroll-snap-align: start;
       }
     }
 

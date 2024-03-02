@@ -17,6 +17,11 @@
 }
 
 html {
+	&:not(:has(.directors)) {
+		scroll-snap-type: y mandatory;
+		scroll-behavior: smooth;
+	}
+
 	&:has(.directors) {
 		--background: #{$grey-light};
 		--foreground-inverse: #{$grey-light};
