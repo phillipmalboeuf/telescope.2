@@ -87,10 +87,10 @@
     {/if}
 
     {#if film.fields.popup && !popup}
-    <aside transition:fly={{ y: '100%', duration: 333 }}>
+    <aside transition:fly={{ y: $page.data.device !== 'desktop' ? '-100%' : '100%', duration: 333 }}>
       <button class="button--blur button--blur--light" on:click|stopPropagation|preventDefault={() => {
         popup = true
-      }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} ↗</button>
+      }}>{#if $page.data.locale === 'fr'}Voir la distinction{:else}View distinction{/if} <span>↗</span></button>
     </aside>
     {/if}
   </figure>
@@ -139,6 +139,12 @@
     &:not(.full) {
       @media (max-width: $mobile) {
         margin-bottom: 50vh;
+
+        figcaption {
+          top: 100%;
+          bottom: auto;
+          color: var(--foreground);
+        }
       }
 
       &:after {
@@ -176,10 +182,27 @@
 
       @media (max-width: $mobile) {
         order: -1;
+        padding: ($mobile_base) ($mobile_base * 0.5);
       }
 
       button {
         padding: ($base * $scale * 0.25) ($base * $scale * 0.5);
+        
+        span {
+          margin-left: $base * 0.25;
+        }
+      }
+
+      @media (max-width: $mobile) {
+        bottom: auto;
+        top: 0;
+
+        button {
+          span {
+            display: inline-block;
+            transform: rotate(90deg);
+          }
+        }
       }
     }
 
@@ -203,7 +226,7 @@
         position: absolute;
         width: 100%;
         bottom: calc(50% - ($type * 2));
-        padding: $mobile_base 0;
+        padding: ($mobile_base * 0.5) 0;
       }
 
       h6 {
@@ -211,7 +234,7 @@
         padding: 0 $base;
 
         @media (max-width: $mobile) {
-          padding: 0 $mobile_base;
+          padding: 0 ($mobile_base * 0.5);
         }
 
         &:last-child {
@@ -245,6 +268,8 @@
         min-height: 50vh;
 
         @media (max-width: $mobile) {
+          top: 0;
+          bottom: auto;
           padding: $mobile_base;
         }
 
@@ -262,6 +287,10 @@
           &:first-child {
             border-right: 1px solid fade-out($white, 0.75);
             margin-right: $base;
+
+            @media (max-width: $mobile) {
+              border-right: none;
+            }
           }
 
           :global(p) {
@@ -276,6 +305,10 @@
           h5 {
             margin-bottom: 100%;
             opacity: 0.5;
+
+            @media (max-width: $mobile) {
+              margin-bottom: 0;
+            }
           }
 
           footer {

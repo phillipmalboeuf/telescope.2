@@ -47,7 +47,7 @@
 
       @media (max-width: $mobile) {
         font-size: $mobile_base * $mobile_scale;
-        top: $mobile_base * 0.83333333;
+        top: $mobile_base;
         right: $mobile_base;
       }
     }

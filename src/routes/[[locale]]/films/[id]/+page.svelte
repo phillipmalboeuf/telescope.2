@@ -288,7 +288,6 @@
         }
 
         &:not(:first-child) {
-          position: absolute;
           top: calc(50vh + ($base));
           left: 0;
           width: 50%;
@@ -296,6 +295,13 @@
 
         &:nth-last-child(2) {
           left: 50%;
+        }
+
+        &:last-child {
+          top: $base;
+          right: 0;
+          width: auto;
+          font-size: $mobile_base * $mobile_scale;
         }
       }
     }
