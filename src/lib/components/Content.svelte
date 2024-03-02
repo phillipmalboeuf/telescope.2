@@ -30,11 +30,19 @@
     flex-wrap: wrap;
     align-items: flex-end;
 
+    @media (max-width: $mobile) {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
     li {
       width: 50%;
 
       @media (max-width: $mobile) {
         width: 100%;
+        scroll-snap-align: start;
       }
 
       &.wide {
