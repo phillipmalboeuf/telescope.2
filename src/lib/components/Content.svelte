@@ -31,10 +31,12 @@
     align-items: flex-end;
 
     @media (max-width: $mobile) {
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      height: 100vh;
-      overflow-y: auto;
+      &:has(.full) {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        height: 100vh;
+        overflow-y: auto;
+      }
     }
 
     li {
