@@ -97,7 +97,7 @@
   </figcaption> -->
   <figcaption class="title"><slot name="title" /></figcaption>
 
-  <video autoplay disableRemotePlayback
+  <video autoplay={$page.data.device === 'desktop'} disableRemotePlayback
     src={srcs ? srcs[resolution].fields?.file?.url?.replace('//videos.ctfassets.net', '//telescopefilms.b-cdn.net') : undefined}
     bind:currentTime={time}
     bind:duration

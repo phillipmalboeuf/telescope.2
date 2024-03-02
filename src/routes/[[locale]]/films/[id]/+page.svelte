@@ -141,27 +141,29 @@
       flex: 1;
       position: relative;
 
-      &:after,
-      &:before {
-        pointer-events: none;
-        content: "";
-        position: absolute;
-        bottom: -1px;
-        right: 0;
-        width: 100%;
-        height: 10vh;
-        --turn: 1turn;
-        background: linear-gradient(var(--turn), var(--background) 0%, transparent 100%);
+      @media (min-width: $mobile) {
+        &:after,
+        &:before {
+          pointer-events: none;
+          content: "";
+          position: absolute;
+          bottom: -1px;
+          right: 0;
+          width: 100%;
+          height: 10vh;
+          --turn: 1turn;
+          background: linear-gradient(var(--turn), var(--background) 0%, transparent 100%);
 
-        :global(html:has(.films)) & {
-          background: linear-gradient(var(--turn), $black-light 0%, transparent 100%);
+          :global(html:has(.films)) & {
+            background: linear-gradient(var(--turn), $black-light 0%, transparent 100%);
+          }
         }
-      }
 
-      &:before {
-        --turn: 0.5turn;
-        top: 10vh;
-        bottom: auto;
+        &:before {
+          --turn: 0.5turn;
+          top: 10vh;
+          bottom: auto;
+        }
       }
       
       > div {
@@ -169,9 +171,12 @@
         flex-direction: column;
         gap: $base;
 
-        max-height: 50vh;
-        overflow-y: auto;
-        padding-right: $base;
+        @media (min-width: $mobile) {
+          max-height: 50vh;
+          overflow-y: auto;
+          padding-right: $base;
+        }
+
         padding-top: 10vh;
         padding-bottom: 10vh;
       }
@@ -219,6 +224,10 @@
 
     figure {
       width: 50%;
+
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
     }
 
     li {

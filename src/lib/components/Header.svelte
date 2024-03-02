@@ -88,6 +88,7 @@
         <li><a
           on:click={() => visible = false}
           on:mouseenter={() => {
+            if ($page.data.device !== 'desktop') return
             visibleMedia = {
               media: director.fields.featuredFilm?.fields.teaser,
               poster: director.fields.featuredFilm?.fields.poster
@@ -196,8 +197,7 @@
         }
       }
 
-      ol,
-      aside {
+      ol {
         opacity: 0.1;
         visibility: hidden;
         transition: opacity 666ms;
@@ -217,10 +217,6 @@
         
         &:not(:first-child):not(:last-child) {
           border-left: 1px solid transparent;
-        }
-
-        aside {
-          width: 175%;
         }
 
         &:nth-child(4) {
@@ -262,6 +258,10 @@
     small {
       display: none;
       padding: 0 ($base * 0.75);
+
+      @media (max-width: $mobile) {
+        padding: 0 ($mobile_base * 0.5);
+      }
     }
 
     @media (max-width: $mobile) {
@@ -313,8 +313,9 @@
         }
 
         nav {
-          min-height: 50vh;
+          min-height: 66vh;
           flex-direction: column;
+          gap: $base * 0.5;
         }
       }
 
@@ -326,8 +327,7 @@
         opacity: 1;
       }
 
-      ol,
-      aside {
+      ol {
         // opacity: 1;
         visibility: visible;
 
@@ -335,8 +335,7 @@
           display: none;
 
           &.films,
-          &.directors,
-          &.about {
+          &.directors {
             display: block;
             font-size: $mobile_base;
             position: absolute;
@@ -349,10 +348,10 @@
             overflow-y: auto;
 
             li {
-              margin-bottom: 0;
+              margin-bottom: $mobile_base * 0.5;
 
               a {
-                font-size: $mobile_base * $mobile_scale;
+                font-size: $mobile_base;
               }
             }
           }
