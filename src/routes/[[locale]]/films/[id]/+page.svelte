@@ -106,8 +106,8 @@
 {/if}
 
 
-{#if data.director}
-<Table labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.director.fields.name}` }}
+{#if data.film.fields.description && data.film.fields.director}
+<Table director={data.film.fields.director.fields.tagIdentifier} labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.film.fields.director.fields.name}` }}
   columns={[
     { label: 'Projet', key: 'title' },
     { label: 'Partenaires', key: 'client' },
@@ -212,8 +212,19 @@
         }
 
         &:first-child {
-          padding-top: 0 !important;
           h4 { display: none; }
+
+          > div {
+            padding-top: $base * $scale * 2;
+            padding-bottom: $base;
+          }
+        }
+
+        &:not(:first-child) {
+          > div {
+            padding-top: $base;
+            padding-bottom: 0;
+          }
         }
       }
     }
@@ -259,12 +270,18 @@
       width: 25%;
       padding: 0 ($base * 0.75);
 
-      &:global(.collides) {
-        color: $white !important;
+      @media (min-width: $mobile) {
+        &:global(.collides) {
+          color: $white !important;
+        }
       }
 
       &:first-child {
         width: 25%;
+
+        &:global(.collides) {
+          color: $white !important;
+        }
       }
 
       &:last-child {
@@ -283,6 +300,7 @@
         left: 0;
 
         &:first-child {
+          position: fixed;
           width: 75%;
           font-size: $mobile_base * $mobile_scale * 1.15;
         }
@@ -298,6 +316,7 @@
         }
 
         &:last-child {
+          position: fixed;
           top: $base;
           right: 0;
           width: auto;
