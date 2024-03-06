@@ -106,7 +106,7 @@
 {/if}
 
 
-{#if data.film.fields.description && data.film.fields.director}
+<!-- {#if data.film.fields.description && data.film.fields.director}
 <Table director={data.film.fields.director.fields.tagIdentifier} labels={{ open: 'Voir le portfolio complet', close: `Portfolio de ${data.film.fields.director.fields.name}` }}
   columns={[
     { label: 'Projet', key: 'title' },
@@ -115,7 +115,7 @@
     { label: 'Catégorie', key: 'tags' },
     { label: 'Année', key: 'publishedDate' }
   ]} />
-{/if}
+{/if} -->
 
 <style lang="scss">
   main {
