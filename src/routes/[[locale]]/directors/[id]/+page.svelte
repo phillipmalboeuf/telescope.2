@@ -21,13 +21,13 @@
   <ListFilm i={1000} film={vedette} full wide />
 </figure>
 
-<aside>
+<!-- <aside>
   <h1 class="h2">
     {data.director.fields.name} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {#if data.director.fields.biographie}{data.director.fields.biographie}{:else}information sur le réalisateur ipsum dolor as sit amet, consectetur adipiscing elit, sed
     doquis eiusmod tempor eti incididunt. Ut labore et dolore magna aliquaut enim
     ad minim veniam, nostrud exercitation ullamcoas laboris nisi ut aliquip commodo.{/if}
   </h1>
-</aside>
+</aside> -->
 
 <Content content={data.director.fields.featuredFilms?.length ? data.director.fields.featuredFilms : data.portfolio} />
 
@@ -50,7 +50,7 @@
   figure {
     display: block;
     position: relative;
-    z-index: 100;
+    z-index: -1;
   }
 
   aside {
