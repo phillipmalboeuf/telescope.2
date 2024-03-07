@@ -50,15 +50,15 @@
 <!-- {JSON.stringify(media, null, 2)} -->
 <picture>
   {#if small}
-  <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(400 * ar)}` : ''}" media="(max-width: 900px)" />
-  <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=crop&h=${Math.round(600 * ar)}` : ''}" media="(max-width: 1200px)" />
-  <img src="{cdn(media.fields.file.url)}?w=800{ar ? `&fit=crop&h=${Math.round(800 * ar)}` : ''}"
+  <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=fill&h=${Math.round(400 * ar)}` : ''}" media="(max-width: 900px)" />
+  <source srcSet="{cdn(media.fields.file.url)}?w=600{ar ? `&fit=fill&h=${Math.round(600 * ar)}` : ''}" media="(max-width: 1200px)" />
+  <img src="{cdn(media.fields.file.url)}?w=800{ar ? `&fit=fill&h=${Math.round(800 * ar)}` : ''}"
     style={`aspect-ratio: ${ar ? `800 / ${Math.round(ar * 800) + 2}` : `${media.fields.file.details.image.width} / ${media.fields.file.details.image.height}`}`}
     alt="{media.fields.title}" loading={eager ? "eager" : "lazy"} />
   {:else}
-  <source srcSet="{cdn(media.fields.file.url)}?w=900{ar ? `&fit=crop&h=${Math.round(900 * ar)}` : ''}" media="(max-width: 900px)" />
-  <source srcSet="{cdn(media.fields.file.url)}?w=1200{ar ? `&fit=crop&h=${Math.round(1200 * ar)}` : ''}" media="(max-width: 1200px)" />
-  <img src="{cdn(media.fields.file.url)}?w=1800{ar ? `&fit=crop&h=${Math.round(1800 * ar)}` : ''}"
+  <source srcSet="{cdn(media.fields.file.url)}?w=900{ar ? `&fit=fill&h=${Math.round(900 * ar)}` : ''}" media="(max-width: 900px)" />
+  <source srcSet="{cdn(media.fields.file.url)}?w=1200{ar ? `&fit=fill&h=${Math.round(1200 * ar)}` : ''}" media="(max-width: 1200px)" />
+  <img src="{cdn(media.fields.file.url)}?w=1800{ar ? `&fit=fill&h=${Math.round(1800 * ar)}` : ''}"
     style={`aspect-ratio: ${ar ? `1800 / ${Math.round(ar * 1800) + 2}` : `${media.fields.file.details.image.width} / ${media.fields.file.details.image.height}`}`}
     alt="{media.fields.title}" loading={eager ? "eager" : "lazy"} />
   {/if}
